@@ -1,0 +1,10 @@
+.vscode/
+__pycache__/
+dist/
+build/
+env/
+figs/
+src/ui/
+
+*.so
+run
