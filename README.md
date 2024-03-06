@@ -8,7 +8,7 @@ Instructions for linux
 
 #### QT
 
-This program uses the QT6 library, and the PyQt6 python bindings to it.
+This program uses the QT6 library, and the PySide6 python bindings to it.
 In ubuntu based distributions, you can install it via:
 
 ```

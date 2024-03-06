@@ -12,15 +12,6 @@ PEN_BLACK = pg.mkPen(color="#000000", width=1)
 COLORMAP = pg.colormap.get("CET-R4")
 
 
-def get_names(arr_text: str):
-    if arr_text in SIGNAL_NAMES.keys():
-        names = SIGNAL_NAMES[arr_text]
-    else:
-        names = arr_text.strip("[]").split(", ")
-    print("Names: ", names)
-    return names
-
-
 def getLastShot(lineedit, printer=print):
     shot, ierr = da.py_lastshot()
     if ierr == 0:
@@ -55,7 +46,11 @@ def bandpass_filter_vec(vec, flim, dt=0.001):
             sos = butter(ord, wn, btype="highpass", output="sos", fs=1 / dt)
         else:
             ord, wn = buttord(
-                wp=flim, ws=[0.9 * flim[0], 1.1 * flim[1]], gpass=3, gstop=20, fs=1 / dt
+                wp=flim,
+                ws=[0.9 * flim[0], 1.1 * flim[1]],
+                gpass=3,
+                gstop=20,
+                fs=1 / dt,
             )
             sos = butter(ord, wn, btype="bandpass", output="sos", fs=1 / dt)
     except Exception as e:

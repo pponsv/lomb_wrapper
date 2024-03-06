@@ -1,8 +1,9 @@
 from .utils import get_value_from_field
+from .ui.ui_mainwindow import Ui_MainWindow
 
 
 class WindowInfo:
-    def __init__(self, UiClass):
+    def __init__(self, UiClass: Ui_MainWindow):
         self.ui = UiClass
         self.refresh()
 
@@ -18,10 +19,7 @@ class WindowInfo:
     def refresh(self):
         self.array = self.ui.signalArraySelector.currentText()
         self.shot = get_value_from_field(self.ui.shotNumberInput, int)
-        self.downsampleFactor = get_value_from_field(self.ui.downsampleFactorBox, int)
 
-        self.downsample = self.ui.downsampleBox.isChecked()
-        self.selectedCoil = self.ui.coilDataRetrievalSelector.currentText()
         self.filter_info()
         self.spgram_info()
 

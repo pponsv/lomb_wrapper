@@ -30,7 +30,7 @@ class Signal:
             print(f"{self.shot} {self.name} - Done")
         return self.shot, self.name
 
-    def plot(self, ax, ds, dsFactor, filt, flim, pen=PEN_BLACK):
+    def plot(self, ax, filt, flim, pen=PEN_BLACK):
         ax.clear()
         ax.setLabels(left=self.name)
         if self.ierr != 0:
@@ -39,16 +39,12 @@ class Signal:
             x = self.filter(flim)
         else:
             x = self.x
-        skip = dsFactor if ds else 1
-        ax.plot(self.t[::skip], x[::skip], pen=pen)
+        ax.plot(self.t, x, pen=pen)
 
-    def plot_integrated(self, ax, ds, dsFactor, pen):
+    def plot_integrated(self, ax, pen):
         ax.clear()
         nx = cumulative_trapezoid(self.x - np.mean(self.x), self.t, initial=0)
-        if ds is True:
-            ax.plot(self.t[::dsFactor], nx[::dsFactor], pen=pen)
-        else:
-            ax.plot(self.t, nx, pen=pen)
+        ax.plot(self.t, nx, pen=pen)
         ax.setLabels(left=self.name)
         axis = ax.getAxis("left")
         axis.setWidth(40)
@@ -85,7 +81,9 @@ class Signal:
             ax.addItem(img)
             ax.setXRange(x0, x0 + w)
             ax.setYRange(y0, y0 + h)
-            cbar = ax.addColorBar(img, colorMap=colormap, values=(-40, 0), width=0.25)
+            cbar = ax.addColorBar(
+                img, colorMap=colormap, values=(-40, 0), width=0.25
+            )
             cbar.getAxis("right").setWidth(25)
 
     def filter(self, flim):

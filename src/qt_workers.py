@@ -1,4 +1,4 @@
-from PyQt6 import QtCore
+from PySide6 import QtCore
 
 
 class Worker(QtCore.QRunnable):
@@ -9,7 +9,7 @@ class Worker(QtCore.QRunnable):
         self.kwargs = kwargs
         self.signaler = WorkerSignals()
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def run(self):
         try:
             result = self.fun(*self.args, **self.kwargs)
@@ -22,6 +22,6 @@ class Worker(QtCore.QRunnable):
 
 
 class WorkerSignals(QtCore.QObject):
-    finished = QtCore.pyqtSignal()
-    error = QtCore.pyqtSignal(tuple)
-    result = QtCore.pyqtSignal(object)
+    finished = QtCore.Signal()
+    error = QtCore.Signal(tuple)
+    result = QtCore.Signal(object)

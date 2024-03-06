@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 import sys  # We need sys so that we can pass argv to QApplication
 from src.main_window import MainWindow
 
