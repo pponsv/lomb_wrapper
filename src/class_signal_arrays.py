@@ -26,8 +26,14 @@ class Signal_Spgram:
     def read_seq(self):
         self.signal.read_data()
 
-    def add_roi(self, event):
-        print(self.fig.mousePressEvent)
+    def add_roi(self):
+        bounds = (*self.ax["signal"].viewRange()[0],)
+        self.roi = pg.LinearRegionItem(values=bounds)
+        self.roi.setZValue(10)
+        self.ax["signal"].addItem(self.roi)
+        print(bounds)
+        self.roi.setBounds(bounds)
+        self.roi.setSpan
 
     def make_axes(self, signals, sharex=False, sharey=False):
         numx, numy = 1, 2
@@ -65,6 +71,7 @@ class Signal_Spgram:
             pen=PEN_BLACK,
         )
         self.signal.plot_spec(self.ax["spgram"], COLORMAP)
+        self.add_roi()
 
     def plot_integrated(self):
         self.make_axes(self.signal, sharex=True, sharey=False)

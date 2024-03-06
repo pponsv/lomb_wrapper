@@ -2,7 +2,7 @@
 ACTIVATE_VENV = . ./env/bin/activate
 PYTHON = python3
 
-all: configure run
+all: run
 
 run:
 	$(PYTHON) main.py
