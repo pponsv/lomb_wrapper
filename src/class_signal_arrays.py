@@ -5,6 +5,7 @@ from .class_signals import Signal
 from .qt_workers import Worker
 from .class_window_info import WindowInfo
 from .utils import PEN_BLACK, COLORMAP
+from lib import py_dmusic
 
 
 class Signal_Spgram:
@@ -35,7 +36,7 @@ class Signal_Spgram:
         self.roi.setBounds(bounds)
         self.roi.setSpan
 
-    def make_axes(self, signals, sharex=False, sharey=False):
+    def make_axes(self):
         numx, numy = 1, 2
         self.fig.clear()
         self.ax = {}
@@ -58,12 +59,15 @@ class Signal_Spgram:
             noverlap=self.info.noverlap,
         )
 
-    def plot_spectrograms(self):
-        self.make_axes(self.signal, sharex=True, sharey=True)
+    def plot_signals(self):
+        self.make_axes()
+        self.plot_signal()
+        self.plot_spectrogram()
+
+    def plot_spectrogram(self):
         self.signal.plot_spec(self.ax["spgram"], COLORMAP)
 
-    def plot_signals(self):
-        self.make_axes(self.signal, sharex=True, sharey=False)
+    def plot_signal(self):
         self.signal.plot(
             self.ax["signal"],
             filt=self.info.filt,
@@ -74,8 +78,28 @@ class Signal_Spgram:
         self.add_roi()
 
     def plot_integrated(self):
-        self.make_axes(self.signal, sharex=True, sharey=False)
+        self.make_axes()
         self.signal.plot_integrated(
             self.ax["signal"],
             pen=PEN_BLACK,
         )
+
+    def load_dmusic(self, path):
+        self.dmusic = py_dmusic.DMusic.load_dmusic_class(path)
+
+    def plot_dmusic(self):
+        self.ax["spgram"].clear()
+        self.ax["spgram"].setLabels(left=self.signal)
+        x0, y0 = self.dmusic.ts[0], self.dmusic.fs[0]
+        w = self.dmusic.ts[-1] - x0
+        h = self.dmusic.fs[-1] - y0
+        img = pg.ImageItem(
+            image=self.dmusic.ps, levels=(-40, 0), rect=[x0, y0, w, h]
+        )
+        self.ax["spgram"].addItem(img)
+        self.ax["spgram"].setXRange(x0, x0 + w)
+        self.ax["spgram"].setYRange(y0, y0 + h)
+        cbar = self.ax["spgram"].addColorBar(
+            img, colorMap=COLORMAP, values=(-40, 0), width=0.25
+        )
+        cbar.getAxis("right").setWidth(25)

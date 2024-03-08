@@ -54,9 +54,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.refreshButton.clicked.connect(self.refresh_plots)
         self.ui.lastShotButton.clicked.connect(self.get_last_shot)
         self.ui.loadDataButton.clicked.connect(self.loadData)
-        self.ui.spectrogramsButton.clicked.connect(self.makeSpectrograms)
         self.ui.fftButton.clicked.connect(self.makeFfts)
         self.ui.integrateDataButton.clicked.connect(self.integrateData)
+        self.ui.loadDmusicButton.clicked.connect(self.load_dmusic)
 
         #   Menu bar
         self.ui.actionSave_figure.triggered.connect(self.savefig)
@@ -104,15 +104,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.array.make_spectrograms()
         self.array.plot_signals()
 
-    def makeSpectrograms(self):
-        self.info.refresh()
-        self.array.make_spectrograms(printer=self.ui.statusbar.showMessage)
-        self.array.plot_spectrograms()
-        self.ui.statusbar.showMessage("Done")
-
     def makeFfts(self):
         self.refresh_plots()
         for key in self.array.ax:
             self.array.ax[key].ctrl.fftCheck.setChecked(True)
             self.array.ax[key].ctrl.logXCheck.setChecked(True)
             self.array.ax[key].ctrl.logYCheck.setChecked(True)
+
+    def load_dmusic(self):
+        path = QtWidgets.QFileDialog.getOpenFileName(
+            parent=self,
+            caption="Open File",
+            dir=QtCore.QDir.homePath(),
+            filter="HDF5 files (*.h5, *.hdf5);;All Files (*.*)",
+            selectedFilter="All Files (*.*)",
+        )[0]
+        self.array.load_dmusic(path)
+        self.array.plot_dmusic()
