@@ -9,6 +9,7 @@ run:
 
 build: 
 	$(MAKE) -C ./lib/TJII_data_acquisition
+	$(MAKE) -C ./lib/lomb_periodogram
 
 rebuild_ui: 
 	mkdir -p src/ui/
@@ -22,5 +23,6 @@ configure:
 clean:
 	rm -rf .vscode/ __pycache__/ src/ui/ figs/
 	$(MAKE) -C ./lib/TJII_data_acquisition clean
+	$(MAKE) -C ./lib/lomb_periodogram clean
 
 deep_clean: remove_env clean
