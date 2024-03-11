@@ -50,7 +50,6 @@ class Signal_Spgram:
             self.ax[key].getAxis("right").setWidth(0)
             self.ax[key].getAxis("bottom").setHeight(20)
             self.ax[key].getAxis("top").setHeight(0)
-        # self.roi_sig = pg.RectROI([0, 0], [0, 0], pen=PEN_BLACK)
 
     def make_spectrograms(self, printer=print):
         self.signal.spectrogram(
@@ -74,7 +73,6 @@ class Signal_Spgram:
             flim=self.info.flim,
             pen=PEN_BLACK,
         )
-        self.signal.plot_spec(self.ax["spgram"], COLORMAP)
         self.add_roi()
 
     def plot_integrated(self):
@@ -84,22 +82,10 @@ class Signal_Spgram:
             pen=PEN_BLACK,
         )
 
-    def load_dmusic(self, path):
+    def from_dmusic(self, path):
         self.dmusic = py_dmusic.DMusic.load_dmusic_class(path)
-
-    def plot_dmusic(self):
-        self.ax["spgram"].clear()
-        self.ax["spgram"].setLabels(left=self.signal)
-        x0, y0 = self.dmusic.ts[0], self.dmusic.fs[0]
-        w = self.dmusic.ts[-1] - x0
-        h = self.dmusic.fs[-1] - y0
-        img = pg.ImageItem(
-            image=self.dmusic.ps, levels=(-40, 0), rect=[x0, y0, w, h]
-        )
-        self.ax["spgram"].addItem(img)
-        self.ax["spgram"].setXRange(x0, x0 + w)
-        self.ax["spgram"].setYRange(y0, y0 + h)
-        cbar = self.ax["spgram"].addColorBar(
-            img, colorMap=COLORMAP, values=(-40, 0), width=0.25
-        )
-        cbar.getAxis("right").setWidth(25)
+        self.signal.t = self.dmusic.t
+        self.signal.x = self.dmusic.y
+        self.signal.spec_freqs = self.dmusic.fs
+        self.signal.spec_times = self.dmusic.ts
+        self.signal.spec_vals = self.dmusic.ps

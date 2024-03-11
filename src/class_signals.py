@@ -12,6 +12,7 @@ class Signal:
     def __init__(self, shot, name):
         self.shot = shot
         self.name = name
+        self.ierr = 0
 
     def read_data(self, printer=print):
         t, x, ierr = da.py_lectur(self.shot, self.name)

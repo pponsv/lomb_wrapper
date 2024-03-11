@@ -115,9 +115,10 @@ class MainWindow(QtWidgets.QMainWindow):
         path = QtWidgets.QFileDialog.getOpenFileName(
             parent=self,
             caption="Open File",
-            dir=QtCore.QDir.homePath(),
+            dir=f"{QtCore.QDir.homePath()}/MEGA/00_doctorado/research/experiments/2022_spatial_periodicity_nbi_driven_ae/Analysis/DMUSIC/hdfs",
             filter="HDF5 files (*.h5, *.hdf5);;All Files (*.*)",
             selectedFilter="All Files (*.*)",
         )[0]
-        self.array.load_dmusic(path)
-        self.array.plot_dmusic()
+        self.make_array()
+        self.array.from_dmusic(path)
+        self.array.plot_signals()
