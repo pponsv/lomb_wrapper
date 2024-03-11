@@ -57,6 +57,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.fftButton.clicked.connect(self.makeFfts)
         self.ui.integrateDataButton.clicked.connect(self.integrateData)
         self.ui.loadDmusicButton.clicked.connect(self.load_dmusic)
+        self.ui.addRegionButton.clicked.connect(self.add_region)
 
         #   Menu bar
         self.ui.actionSave_figure.triggered.connect(self.savefig)
@@ -122,3 +123,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.make_array()
         self.array.from_dmusic(path)
         self.array.plot_signals()
+
+    def add_region(self):
+        bounds = [self.array.linked_rois.xlim, self.array.linked_rois.ylim]
+        print(bounds)

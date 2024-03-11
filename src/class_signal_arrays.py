@@ -2,6 +2,7 @@ from PySide6 import QtCore
 import pyqtgraph as pg
 
 from .class_signals import Signal
+from .class_linked_rois import Linked_ROIS
 from .qt_workers import Worker
 from .class_window_info import WindowInfo
 from .utils import PEN_BLACK, COLORMAP
@@ -28,13 +29,7 @@ class Signal_Spgram:
         self.signal.read_data()
 
     def add_roi(self):
-        bounds = (*self.ax["signal"].viewRange()[0],)
-        self.roi = pg.LinearRegionItem(values=bounds)
-        self.roi.setZValue(10)
-        self.ax["signal"].addItem(self.roi)
-        print(bounds)
-        self.roi.setBounds(bounds)
-        self.roi.setSpan
+        self.linked_rois = Linked_ROIS(self.ax["signal"], self.ax["spgram"])
 
     def make_axes(self):
         numx, numy = 1, 2

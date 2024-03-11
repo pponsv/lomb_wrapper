@@ -254,22 +254,41 @@
        </size>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="1" column="9">
-        <widget class="QLabel" name="label_6">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="fftButton">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="text">
-          <string>nperseg:</string>
+          <string>FFT</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="makeLombButton">
+       <item row="1" column="12">
+        <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Make Periodogram</string>
+          <string>noverlap:</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <spacer name="horizontalSpacer_4">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="integrateDataButton">
+         <property name="text">
+          <string>Integrate</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -281,17 +300,7 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="5">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>t&lt;sub&gt;0&lt;/sub&gt;:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="6">
+       <item row="1" column="7">
         <widget class="QLineEdit" name="lowerTLim">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -328,33 +337,27 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="fftButton">
-         <property name="minimumSize">
-          <size>
-           <width>50</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>50</width>
-           <height>16777215</height>
-          </size>
-         </property>
+       <item row="1" column="8">
+        <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>FFT</string>
+          <string>t&lt;sub&gt;1&lt;/sub&gt;:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="11">
-        <widget class="QLabel" name="label_7">
+       <item row="1" column="6">
+        <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>noverlap:</string>
+          <string>t&lt;sub&gt;0&lt;/sub&gt;:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="12">
+       <item row="1" column="13">
         <widget class="QLineEdit" name="spgramNoverlap">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -385,33 +388,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="10">
-        <widget class="QLineEdit" name="spgramNperseg">
-         <property name="maximumSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>512</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="placeholderText">
-          <string>nperseg</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="integrateDataButton">
-         <property name="text">
-          <string>Integrate</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="8">
+       <item row="1" column="9">
         <widget class="QLineEdit" name="upperTLim">
          <property name="minimumSize">
           <size>
@@ -445,18 +422,41 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="7">
-        <widget class="QLabel" name="label_5">
+       <item row="1" column="11">
+        <widget class="QLineEdit" name="spgramNperseg">
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>22</height>
+          </size>
+         </property>
          <property name="text">
-          <string>t&lt;sub&gt;1&lt;/sub&gt;:</string>
+          <string>512</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="placeholderText">
+          <string>nperseg</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="10">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>nperseg:</string>
+         </property>
         </widget>
        </item>
        <item row="1" column="4">
-        <spacer name="horizontalSpacer_2">
+        <widget class="QPushButton" name="makeLombButton">
+         <property name="text">
+          <string>Make Periodogram</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -467,6 +467,13 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="addRegionButton">
+         <property name="text">
+          <string>Add Region</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -479,7 +486,7 @@
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>19</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
