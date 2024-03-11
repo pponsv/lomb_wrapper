@@ -1,4 +1,4 @@
-from PySide6 import QtCore
+from PySide6 import QtCore, QtWidgets
 import pyqtgraph as pg
 import numpy as np
 
@@ -98,3 +98,21 @@ class Signal_Spgram:
         self.signal.spec_times = self.dmusic.ts
         self.signal.spec_vals = self.dmusic.ps
         self.signal.dt = self.signal.t[1] - self.signal.t[0]
+
+    def make_dmusic(self, filedir):
+        mask = (self.signal.t > self.linked_rois.xlim[0]) & (
+            self.signal.t < self.linked_rois.xlim[1]
+        )
+        self.dmusic = py_dmusic.DMusic(
+            t=self.signal.t[mask],
+            y=self.signal.x[mask],
+            poverlap=0.95,
+            N=400,
+            J=200,
+            K=30,
+            flim=self.linked_rois.ylim,
+        )
+        self.dmusic.spgram_dmusic()
+        self.dmusic.save_dmusic(
+            shot=self.info.shot, savefile="tmp.h5", savedir=filedir  # type: ignore
+        )

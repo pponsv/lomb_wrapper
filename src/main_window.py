@@ -56,6 +56,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.fftButton.clicked.connect(self.makeFfts)
         self.ui.integrateDataButton.clicked.connect(self.integrateData)
         self.ui.loadDmusicButton.clicked.connect(self.load_dmusic)
+        self.ui.makeDmusicButton.clicked.connect(self.make_dmusic)
         self.ui.addRegionButton.clicked.connect(self.add_region)
         self.ui.removeLastRegionButton.clicked.connect(self.remove_last_region)
         self.ui.resizeROIButton.clicked.connect(self.resize_roi)
@@ -139,3 +140,12 @@ class MainWindow(QtWidgets.QMainWindow):
     def plot_filtered(self):
         self.info.refresh()
         self.array.plot_filt_signal()
+
+    def make_dmusic(self):
+        filedir = str(
+            QtWidgets.QFileDialog.getExistingDirectory(
+                self, "Select Directory"
+            )
+        )
+        print(filedir)
+        self.array.make_dmusic(filedir=filedir)
