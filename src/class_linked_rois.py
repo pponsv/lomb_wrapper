@@ -3,35 +3,67 @@ import pyqtgraph as pg
 
 
 class Linked_ROIS:
-    def __init__(self, ax_signal, ax_spgram):
+    def __init__(self, ax_signal: pg.PlotItem, ax_spgram: pg.PlotItem):
         self.ax_signal = ax_signal
         self.ax_spgram = ax_spgram
-        self.xlim = []
-        self.ylim = []
-        self.add_roi_signal()
-        self.add_roi_spgram()
-    
-    def get_lims(self):
+        #   Get initial limits
         x0, x1 = self.ax_signal.viewRange()[0]
         y0, y1 = self.ax_spgram.viewRange()[1]
-        self.xlim = [x0 + (x1-x0)/3, x0 + 2*(x1-x0)/3]
-        self.ylim = [y0 + (y1-y0)/3, y0 + 2*(y1-y0)/3]
-
+        print(y0, y1)
+        self.xlim = (x0 + (x1 - x0) / 3, x0 + 2 * (x1 - x0) / 3)
+        self.ylim = (y0 + (y1 - y0) / 3, y0 + 2 * (y1 - y0) / 3)
+        print(self.xlim, self.ylim)
+        #   Add ROIs
+        self.add_roi_signal()
+        self.add_roi_spgram()
+        #   Connect signals
+        self.roi_signal.sigRegionChangeFinished.connect(self.update_spgram)
+        self.roi_spgram.sigRegionChangeFinished.connect(self.update_signal)
+        self.ax_signal.sigRangeChanged.connect(self.update_signal_range)
 
     def add_roi_signal(self):
         self.roi_signal = pg.LinearRegionItem(values=self.xlim)
         self.roi_signal.setZValue(10)
         self.ax_signal.addItem(self.roi_signal)
-        # self.roi_signal.setBounds(self.xlim)
-    
+
     def add_roi_spgram(self):
-        self.roi_spgram = pg.RectROI(pos=(self.xlim[0], self.ylim[1]), 
-                                     size=(self.xlim[1]-self.xlim[0], 
-                                           self.ylim[1]-self.ylim[0]),)
+        self.roi_spgram = pg.RectROI(
+            pos=(self.xlim[0], self.ylim[0]),
+            size=(self.xlim[1] - self.xlim[0], self.ylim[1] - self.ylim[0]),
+            # centered=True,
+            sideScalers=True,
+        )
+        self.roi_spgram.setZValue(100)
         self.ax_spgram.addItem(self.roi_spgram)
+        print(self.roi_spgram.pos(), self.roi_spgram.size())
 
-    # def update_signal(self):
-    #     pass
+    def update_signal(self):
+        pos_spgram = self.roi_spgram.pos()
+        size_spgram = self.roi_spgram.size()
+        self.xlim = (pos_spgram[0], pos_spgram[0] + size_spgram[0])
+        self.ylim = (pos_spgram[1], pos_spgram[1] + size_spgram[1])
+        print("update_signal", self.xlim)
+        self.roi_signal.setRegion(self.xlim)
 
+    def update_spgram(self):
+        self.xlim = self.roi_signal.getRegion()
+        print("update_spgram", self.xlim)
+        self.roi_spgram.setPos((self.xlim[0], self.ylim[0]), finish=False)
+        self.roi_spgram.setSize(
+            (self.xlim[1] - self.xlim[0], self.ylim[1] - self.ylim[0]),  # type: ignore
+            finish=False,
+        )
 
+    def update_signal_range(self):
+        x0, x1 = self.ax_signal.viewRange()[0]
+        y0, y1 = self.ax_spgram.viewRange()[1]
+        self.xlim = (max(x0, self.xlim[0]), min(x1, self.xlim[1]))
+        self.ylim = (max(y0, self.ylim[0]), min(y1, self.ylim[1]))
 
+        self.roi_signal.setRegion(self.xlim)
+        self.roi_spgram.setPos((self.xlim[0], self.ylim[0]), finish=False)
+        self.roi_spgram.setSize(
+            (self.xlim[1] - self.xlim[0], self.ylim[1] - self.ylim[0]),  # type: ignore
+            finish=False,
+        )
+        print("update_signal_range", self.xlim, self.ylim)

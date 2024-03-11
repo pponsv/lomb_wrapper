@@ -1,5 +1,6 @@
 from PySide6 import QtCore
 import pyqtgraph as pg
+import numpy as np
 
 from .class_signals import Signal
 from .class_linked_rois import Linked_ROIS
@@ -57,6 +58,7 @@ class Signal_Spgram:
         self.make_axes()
         self.plot_signal()
         self.plot_spectrogram()
+        self.add_roi()
 
     def plot_spectrogram(self):
         self.signal.plot_spec(self.ax["spgram"], COLORMAP)
@@ -68,7 +70,6 @@ class Signal_Spgram:
             flim=self.info.flim,
             pen=PEN_BLACK,
         )
-        self.add_roi()
 
     def plot_integrated(self):
         self.make_axes()
@@ -79,8 +80,9 @@ class Signal_Spgram:
 
     def from_dmusic(self, path):
         self.dmusic = py_dmusic.DMusic.load_dmusic_class(path)
-        self.signal.t = self.dmusic.t
-        self.signal.x = self.dmusic.y
+        self.signal.t = np.array(self.dmusic.t)
+        self.signal.x = np.array(self.dmusic.y)
         self.signal.spec_freqs = self.dmusic.fs
         self.signal.spec_times = self.dmusic.ts
         self.signal.spec_vals = self.dmusic.ps
+        self.signal.dt = self.signal.t[1] - self.signal.t[0]
