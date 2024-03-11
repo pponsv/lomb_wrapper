@@ -125,5 +125,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.array.plot_signals()
 
     def add_region(self):
-        bounds = [self.array.linked_rois.xlim, self.array.linked_rois.ylim]
-        print(bounds)
+        tlim = self.array.linked_rois.xlim
+        flim = self.array.linked_rois.ylim
+        f0 = abs((flim[1] - flim[0]) / 2)
+        print(tlim, flim, f0)
