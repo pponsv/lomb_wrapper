@@ -4,3 +4,6 @@
 [submodule "lib/lomb_periodogram"]
 	path = lib/lomb_periodogram
 	url = https://github.com/pponsv/lomb_periodogram
+[submodule "lib/TJII_data_acquisition"]
+	path = lib/TJII_data_acquisition
+	url = https://github.com/pponsv/TJII_data_acquisition
