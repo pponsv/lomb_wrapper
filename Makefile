@@ -5,18 +5,23 @@ PYTHON = python3
 all: run
 
 run:
-	$(PYTHON) main.py
+	$(ACTIVATE_VENV); $(PYTHON) main.py
 
 build: 
-	$(MAKE) -C ./lib/TJII_data_acquisition
-	$(MAKE) -C ./lib/lomb_periodogram
+	$(ACTIVATE_VENV); $(MAKE) -C ./lib/TJII_data_acquisition
+	$(ACTIVATE_VENV); $(MAKE) -C ./lib/lomb_periodogram
+
+env: 
+	test -d env || python3 -m venv ./env
 
 rebuild_ui: 
 	mkdir -p src/ui/
-	pyside6-uic ./ui/MainWindow.ui -o ./src/ui/ui_mainwindow.py
-	pyside6-uic ./ui/ListDialog.ui -o ./src/ui/ui_listdialog.py
+	$(ACTIVATE_VENV); pyside6-uic ./ui/MainWindow.ui -o ./src/ui/ui_mainwindow.py
+	$(ACTIVATE_VENV); pyside6-uic ./ui/ListDialog.ui -o ./src/ui/ui_listdialog.py
 
 configure: 
+	$(MAKE) env
+	$(ACTIVATE_VENV); pip install -r requirements.txt
 	$(MAKE) rebuild_ui
 	$(MAKE) build
 
@@ -24,5 +29,8 @@ clean:
 	rm -rf .vscode/ __pycache__/ src/ui/ figs/
 	$(MAKE) -C ./lib/TJII_data_acquisition clean
 	$(MAKE) -C ./lib/lomb_periodogram clean
+
+remove_env:
+	rm -rf env/
 
 deep_clean: remove_env clean
