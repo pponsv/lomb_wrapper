@@ -44,6 +44,58 @@
        </size>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="14">
+        <widget class="QLabel" name="signalsLabel">
+         <property name="text">
+          <string>Signal: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QPushButton" name="lastShotButton">
+         <property name="text">
+          <string>Last shot</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="8">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;f&lt;span style=&quot; vertical-align:sub;&quot;&gt;min&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QPushButton" name="loadDmusicButton">
+         <property name="text">
+          <string>Load DMUSIC</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="10">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;f&lt;span style=&quot; vertical-align:sub;&quot;&gt;max&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="15">
+        <widget class="QComboBox" name="signalArraySelector">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <item>
+          <property name="text">
+           <string>MIR5C</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>H1P01</string>
+          </property>
+         </item>
+        </widget>
+       </item>
        <item row="0" column="9">
         <widget class="QLineEdit" name="filterFMin">
          <property name="sizePolicy">
@@ -69,121 +121,6 @@
            <width>40</width>
            <height>0</height>
           </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Shot:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="15">
-        <widget class="QComboBox" name="signalArraySelector">
-         <property name="editable">
-          <bool>true</bool>
-         </property>
-         <item>
-          <property name="text">
-           <string>MIR5C</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>H1P01</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QPushButton" name="makeDmusicButton">
-         <property name="text">
-          <string>Make DMUSIC</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="14">
-        <widget class="QLabel" name="signalsLabel">
-         <property name="text">
-          <string>Signal: </string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="12">
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;[kHz]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="shotNumberInput">
-         <property name="maximumSize">
-          <size>
-           <width>80</width>
-           <height>22</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="10">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;f&lt;span style=&quot; vertical-align:sub;&quot;&gt;max&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5">
-        <widget class="QPushButton" name="lastShotButton">
-         <property name="text">
-          <string>Last shot</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="16">
-        <widget class="QPushButton" name="refreshButton">
-         <property name="text">
-          <string>Refresh</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="13">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="7">
-        <widget class="QCheckBox" name="filterCheckbox">
-         <property name="text">
-          <string>Filter</string>
          </property>
         </widget>
        </item>
@@ -222,17 +159,80 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="8">
-        <widget class="QLabel" name="label_8">
+       <item row="0" column="12">
+        <widget class="QLabel" name="label_10">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;f&lt;span style=&quot; vertical-align:sub;&quot;&gt;min&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;[kHz]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="4">
-        <widget class="QPushButton" name="loadDmusicButton">
+       <item row="0" column="13">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>25</height>
+          </size>
+         </property>
          <property name="text">
-          <string>Load DMUSIC</string>
+          <string>Shot:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="makeDmusicButton">
+         <property name="text">
+          <string>Make DMUSIC</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="shotNumberInput">
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>22</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="16">
+        <widget class="QPushButton" name="refreshButton">
+         <property name="text">
+          <string>Refresh</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="7">
+        <widget class="QPushButton" name="filterButton">
+         <property name="text">
+          <string>Filter</string>
          </property>
         </widget>
        </item>
@@ -273,7 +273,14 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="12">
+       <item row="1" column="3">
+        <widget class="QPushButton" name="resizeROIButton">
+         <property name="text">
+          <string>Resize ROI</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="15">
         <widget class="QLabel" name="label_7">
          <property name="text">
           <string>noverlap:</string>
@@ -287,7 +294,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="5">
+       <item row="1" column="8">
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -300,7 +307,14 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="7">
+       <item row="1" column="4">
+        <widget class="QPushButton" name="addRegionButton">
+         <property name="text">
+          <string>Add Region</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="10">
         <widget class="QLineEdit" name="lowerTLim">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -337,7 +351,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="8">
+       <item row="1" column="11">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>t&lt;sub&gt;1&lt;/sub&gt;:</string>
@@ -347,7 +361,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="6">
+       <item row="1" column="9">
         <widget class="QLabel" name="label_3">
          <property name="text">
           <string>t&lt;sub&gt;0&lt;/sub&gt;:</string>
@@ -357,7 +371,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="13">
+       <item row="1" column="16">
         <widget class="QLineEdit" name="spgramNoverlap">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -388,7 +402,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="9">
+       <item row="1" column="12">
         <widget class="QLineEdit" name="upperTLim">
          <property name="minimumSize">
           <size>
@@ -422,7 +436,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="11">
+       <item row="1" column="14">
         <widget class="QLineEdit" name="spgramNperseg">
          <property name="maximumSize">
           <size>
@@ -441,14 +455,14 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="10">
+       <item row="1" column="13">
         <widget class="QLabel" name="label_6">
          <property name="text">
           <string>nperseg:</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
+       <item row="1" column="7">
         <widget class="QPushButton" name="makeLombButton">
          <property name="text">
           <string>Make Periodogram</string>
@@ -468,12 +482,25 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="addRegionButton">
+       <item row="1" column="5">
+        <widget class="QPushButton" name="removeLastRegionButton">
          <property name="text">
-          <string>Add Region</string>
+          <string>Remove Region</string>
          </property>
         </widget>
+       </item>
+       <item row="1" column="6">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>

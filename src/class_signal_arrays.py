@@ -11,6 +11,8 @@ from lib import py_dmusic
 
 
 class Signal_Spgram:
+    ax: dict[str, pg.PlotItem]
+
     def __init__(
         self,
         shot,
@@ -66,17 +68,27 @@ class Signal_Spgram:
     def plot_signal(self):
         self.signal.plot(
             self.ax["signal"],
-            filt=self.info.filt,
-            flim=self.info.flim,
             pen=PEN_BLACK,
         )
 
+    def plot_filt_signal(self):
+        self.ax["signal"].clear()
+        self.signal.plot_filt(
+            self.ax["signal"],
+            self.info.flim,
+            pen=PEN_BLACK,
+        )
+        self.ax["signal"].enableAutoRange(enable=True, y=True, x=False)
+        self.ax["signal"].addItem(self.linked_rois.roi_signal)
+
     def plot_integrated(self):
-        self.make_axes()
+        self.ax["signal"].clear()
         self.signal.plot_integrated(
             self.ax["signal"],
             pen=PEN_BLACK,
         )
+        self.ax["signal"].enableAutoRange(enable=True, y=True, x=False)
+        self.ax["signal"].addItem(self.linked_rois.roi_signal)
 
     def from_dmusic(self, path):
         self.dmusic = py_dmusic.DMusic.load_dmusic_class(path)

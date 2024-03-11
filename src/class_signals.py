@@ -31,15 +31,16 @@ class Signal:
             print(f"{self.shot} {self.name} - Done")
         return self.shot, self.name
 
-    def plot(self, ax, filt, flim, pen=PEN_BLACK):
+    def plot(self, ax, pen=PEN_BLACK):
         ax.clear()
         ax.setLabels(left=self.name)
         if self.ierr != 0:
             return
-        if filt is True:
-            x = self.filter(flim)
-        else:
-            x = self.x
+        x = self.x
+        ax.plot(self.t, x, pen=pen)
+
+    def plot_filt(self, ax, flim, pen=PEN_BLACK):
+        x = self.filter(flim)
         ax.plot(self.t, x, pen=pen)
 
     def plot_integrated(self, ax, pen):

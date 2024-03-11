@@ -49,8 +49,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.spgramNperseg.setValidator(INT_VALIDATOR)
         self.ui.spgramNoverlap.setValidator(INT_VALIDATOR)
 
-        #   Connections
-        self.ui.shotNumberInput.returnPressed.connect(self.loadData)
+        #   Button Connections
         self.ui.refreshButton.clicked.connect(self.refresh_plots)
         self.ui.lastShotButton.clicked.connect(self.get_last_shot)
         self.ui.loadDataButton.clicked.connect(self.loadData)
@@ -58,7 +57,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.integrateDataButton.clicked.connect(self.integrateData)
         self.ui.loadDmusicButton.clicked.connect(self.load_dmusic)
         self.ui.addRegionButton.clicked.connect(self.add_region)
-
+        self.ui.removeLastRegionButton.clicked.connect(self.remove_last_region)
+        self.ui.resizeROIButton.clicked.connect(self.resize_roi)
+        self.ui.filterButton.clicked.connect(self.plot_filtered)
+        #   Keypress Connections
+        self.ui.shotNumberInput.returnPressed.connect(self.loadData)
         #   Menu bar
         self.ui.actionSave_figure.triggered.connect(self.savefig)
 
@@ -107,10 +110,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def makeFfts(self):
         self.refresh_plots()
-        for key in self.array.ax:
-            self.array.ax[key].ctrl.fftCheck.setChecked(True)
-            self.array.ax[key].ctrl.logXCheck.setChecked(True)
-            self.array.ax[key].ctrl.logYCheck.setChecked(True)
+        self.array.ax["signal"].ctrl.fftCheck.setChecked(True)
+        self.array.ax["signal"].ctrl.logXCheck.setChecked(True)
+        self.array.ax["signal"].ctrl.logYCheck.setChecked(True)
 
     def load_dmusic(self):
         path = QtWidgets.QFileDialog.getOpenFileName(
@@ -125,7 +127,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.array.plot_signals()
 
     def add_region(self):
-        tlim = self.array.linked_rois.xlim
-        flim = self.array.linked_rois.ylim
-        f0 = abs((flim[1] - flim[0]) / 2)
-        print(tlim, flim, f0)
+        self.array.linked_rois.add_region()
+
+    def remove_last_region(self):
+        self.array.linked_rois.remove_last_region()
+
+    def resize_roi(self):
+        self.array.linked_rois.resize_roi()
+        self.array.linked_rois.redraw_rois()
+
+    def plot_filtered(self):
+        self.info.refresh()
+        self.array.plot_filt_signal()

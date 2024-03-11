@@ -24,7 +24,6 @@ class WindowInfo:
         self.spgram_info()
 
     def filter_info(self):
-        self.filt = self.ui.filterCheckbox.isChecked()
         self.flim = (
             get_value_from_field(self.ui.filterFMin, float),
             get_value_from_field(self.ui.filterFMax, float),
