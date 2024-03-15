@@ -21,8 +21,8 @@ class Linked_ROIS:
         self.add_roi_signal()
         self.add_roi_spgram()
         #   Connect signals
-        self.roi_signal.sigRegionChangeFinished.connect(self.update_spgram)
-        self.roi_spgram.sigRegionChangeFinished.connect(self.update_signal)
+        self.roi_signal.sigRegionChanged.connect(self.update_spgram)
+        self.roi_spgram.sigRegionChanged.connect(self.update_signal)
         self.ax_signal.sigRangeChanged.connect(self.update_signal_range)
 
     def resize_roi(self):
