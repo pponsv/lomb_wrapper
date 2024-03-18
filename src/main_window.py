@@ -135,7 +135,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def resize_roi(self):
         self.array.linked_rois.resize_roi()
-        self.array.linked_rois.redraw_rois()
 
     def plot_filtered(self):
         self.info.refresh()

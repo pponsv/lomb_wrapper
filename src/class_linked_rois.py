@@ -15,13 +15,15 @@ class Linked_ROIS:
         self.regions = []
         self.ax_signal = ax_signal
         self.ax_spgram = ax_spgram
-        #   Get initial limits
-        self.resize_roi()
+        self.xlim = (0, 1)
+        self.ylim = (0, 1)
         #   Add ROIs
         self.add_roi_signal()
         self.add_roi_spgram()
+        #   Get initial limits
+        self.resize_roi()
         #   Connect signals
-        self.roi_signal.sigRegionChanged.connect(self.update_spgram)
+        self.roi_signal.sigRegionChangeFinished.connect(self.update_spgram)
         self.roi_spgram.sigRegionChanged.connect(self.update_signal)
         self.ax_signal.sigRangeChanged.connect(self.update_signal_range)
 
@@ -30,9 +32,13 @@ class Linked_ROIS:
         y0, y1 = self.ax_spgram.viewRange()[1]
         self.xlim = (x0 + (x1 - x0) / 3, x0 + 2 * (x1 - x0) / 3)
         self.ylim = (y0 + (y1 - y0) / 3, y0 + 2 * (y1 - y0) / 3)
+        self.redraw_signal()
+        self.redraw_spgram()
 
     def add_roi_signal(self):
-        self.roi_signal = pg.LinearRegionItem(values=self.xlim)
+        self.roi_signal = pg.LinearRegionItem(
+            values=self.xlim, swapMode="sort"
+        )
         self.roi_signal.setZValue(10)
         self.ax_signal.addItem(self.roi_signal)
 
@@ -50,10 +56,11 @@ class Linked_ROIS:
         self.roi_spgram.addScaleHandle([0, 0.5], [1, 0.5])
         self.roi_spgram.setZValue(100)
         self.ax_spgram.addItem(self.roi_spgram)
-        print(self.roi_spgram.pos(), self.roi_spgram.size())
 
-    def redraw_rois(self):
+    def redraw_signal(self):
         self.roi_signal.setRegion(self.xlim)
+
+    def redraw_spgram(self):
         self.roi_spgram.setPos((self.xlim[0], self.ylim[0]), finish=False)
         self.roi_spgram.setSize(
             (self.xlim[1] - self.xlim[0], self.ylim[1] - self.ylim[0]),  # type: ignore
@@ -65,13 +72,11 @@ class Linked_ROIS:
         size_spgram = self.roi_spgram.size()
         self.xlim = (pos_spgram[0], pos_spgram[0] + size_spgram[0])
         self.ylim = (pos_spgram[1], pos_spgram[1] + size_spgram[1])
-        print("update_signal", self.xlim)
-        self.redraw_rois()
+        self.redraw_signal()
 
     def update_spgram(self):
         self.xlim = self.roi_signal.getRegion()  # type: ignore
-        print("update_spgram", self.xlim)
-        self.redraw_rois()
+        self.redraw_spgram()
 
     def update_signal_range(self):
         x0, x1 = self.ax_signal.viewRange()[0]
@@ -85,7 +90,6 @@ class Linked_ROIS:
             (self.xlim[1] - self.xlim[0], self.ylim[1] - self.ylim[0]),  # type: ignore
             finish=False,
         )
-        print("update_signal_range", self.xlim, self.ylim)
 
     def add_region(self):
         self.regions.append(
