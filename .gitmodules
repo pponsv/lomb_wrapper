@@ -7,3 +7,6 @@
 [submodule "lib/TJII_data_acquisition"]
 	path = lib/TJII_data_acquisition
 	url = https://github.com/pponsv/TJII_data_acquisition
+[submodule "lib/TJII_mirnov_array"]
+	path = lib/TJII_mirnov_array
+	url = https://github.com/pponsv/TJII_mirnov_array
