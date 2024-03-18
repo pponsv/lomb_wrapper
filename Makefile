@@ -23,7 +23,11 @@ configure:
 	$(MAKE) env
 	$(ACTIVATE_VENV); pip install -r requirements.txt
 	$(MAKE) rebuild_ui
+	$(MAKE) update_libs
 	$(MAKE) build
+
+update_libs:
+	git submodule update --remote --merge
 
 clean:
 	rm -rf .vscode/ __pycache__/ src/ui/ figs/
