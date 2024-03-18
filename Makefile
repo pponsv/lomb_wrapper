@@ -13,6 +13,7 @@ build:
 
 env: 
 	test -d env || python3 -m venv ./env
+	echo "../../../../lib/" > ./env/lib/python3.10/site-packages/libpath.pth
 
 rebuild_ui: 
 	mkdir -p src/ui/
