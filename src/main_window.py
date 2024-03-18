@@ -120,8 +120,8 @@ class MainWindow(QtWidgets.QMainWindow):
             parent=self,
             caption="Open File",
             dir=f"{QtCore.QDir.homePath()}/MEGA/00_doctorado/research/experiments/2022_spatial_periodicity_nbi_driven_ae/Analysis/DMUSIC/hdfs",
-            filter="HDF5 files (*.h5, *.hdf5);;All Files (*.*)",
-            selectedFilter="All Files (*.*)",
+            filter="All Files (*.*);;HDF5 files (*.h5 *.hdf5)",
+            selectedFilter="HDF5 files (*.h5 *.hdf5)",
         )[0]
         self.make_array()
         self.array.from_dmusic(path)
