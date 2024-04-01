@@ -10,3 +10,6 @@
 [submodule "lib/TJII_mirnov_array"]
 	path = lib/TJII_mirnov_array
 	url = https://github.com/pponsv/TJII_mirnov_array
+[submodule "lib/vmec_utils"]
+	path = lib/vmec_utils
+	url = https://github.com/pponsv/vmec_utils

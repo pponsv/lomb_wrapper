@@ -10,6 +10,7 @@ run:
 build: 
 	$(ACTIVATE_VENV); $(MAKE) -C ./lib/TJII_data_acquisition
 	$(ACTIVATE_VENV); $(MAKE) -C ./lib/lomb_periodogram
+	$(ACTIVATE_VENV); $(MAKE) -C ./lib/vmec_utils
 
 env: 
 	test -d env || python3 -m venv ./env
