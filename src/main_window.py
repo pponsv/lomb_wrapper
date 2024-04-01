@@ -2,6 +2,7 @@ from PySide6 import QtGui, QtCore, QtWidgets
 from matplotlib.pylab import f
 
 from auxfiles.signal_names import SIGNAL_NAMES
+from . import paths
 from . import qt_workers
 from . import utils
 from . import class_signal_arrays
@@ -76,14 +77,21 @@ class MainWindow(QtWidgets.QMainWindow):
         lomb = Lomb(self.coilarr, self.array.linked_rois.regions)
         lomb.make_lomb()
 
+    def save_all_data(self):
+        self.coilarr.write_hdf5(
+            f"{paths.DATA_PATH}/.mirnov__{self.info.shot}.h5"
+        )
+
     def load_all_data(self):
         self.info.refresh()
         if self.info.shot is None:
             return
         self.coilarr = tma.TJII_Mirnov_Arrays(self.info.shot)
         try:
-            # self.coilarr.read_hdf5(f"mirnov__{self.info.shot}.h5")
-            self.coilarr.read_hdf5()
+            # self.coilarr.read_hdf5(
+            #     filename=f"{paths.DATA_PATH}/.mirnov__{self.info.shot}.h5"
+            # )
+            self.coilarr.read_hdf5(initialdir=paths.DATA_PATH)
         except:
             self.coilarr.load_rawdata(self.info.shot)
 
@@ -140,7 +148,7 @@ class MainWindow(QtWidgets.QMainWindow):
         path = QtWidgets.QFileDialog.getOpenFileName(
             parent=self,
             caption="Open File",
-            dir=f"{QtCore.QDir.homePath()}/MEGA/00_doctorado/research/experiments/2022_spatial_periodicity_nbi_driven_ae/Analysis/DMUSIC/hdfs",
+            dir=paths.DMUSIC_PATH,
             filter="All Files (*.*);;HDF5 files (*.h5 *.hdf5)",
             selectedFilter="HDF5 files (*.h5 *.hdf5)",
         )[0]
@@ -164,7 +172,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def make_dmusic(self):
         filedir = str(
             QtWidgets.QFileDialog.getExistingDirectory(
-                self, "Select Directory"
+                self, "Select Directory", dir=paths.DMUSIC_PATH
             )
         )
         print(filedir)
