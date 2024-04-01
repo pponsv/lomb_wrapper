@@ -1,4 +1,5 @@
 from PySide6 import QtGui, QtCore, QtWidgets
+from matplotlib.pylab import f
 
 from auxfiles.signal_names import SIGNAL_NAMES
 from . import qt_workers
@@ -6,6 +7,9 @@ from . import utils
 from . import class_signal_arrays
 from .ui.ui_mainwindow import Ui_MainWindow
 from .class_window_info import WindowInfo
+from .class_lomb import Lomb
+
+from lib import TJII_mirnov_array as tma
 
 
 DOUBLE_VALIDATOR = QtGui.QRegularExpressionValidator(
@@ -61,10 +65,27 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.removeLastRegionButton.clicked.connect(self.remove_last_region)
         self.ui.resizeROIButton.clicked.connect(self.resize_roi)
         self.ui.filterButton.clicked.connect(self.plot_filtered)
+        self.ui.makeLombButton.clicked.connect(self.make_lomb)
+        self.ui.loadAllDataButton.clicked.connect(self.load_all_data)
         #   Keypress Connections
         self.ui.shotNumberInput.returnPressed.connect(self.loadData)
         #   Menu bar
         self.ui.actionSave_figure.triggered.connect(self.savefig)
+
+    def make_lomb(self):
+        lomb = Lomb(self.coilarr, self.array.linked_rois.regions)
+        lomb.make_lomb()
+
+    def load_all_data(self):
+        self.info.refresh()
+        if self.info.shot is None:
+            return
+        self.coilarr = tma.TJII_Mirnov_Arrays(self.info.shot)
+        try:
+            # self.coilarr.read_hdf5(f"mirnov__{self.info.shot}.h5")
+            self.coilarr.read_hdf5()
+        except:
+            self.coilarr.load_rawdata(self.info.shot)
 
     def get_last_shot(self):
         def write_shot(info):

@@ -2,6 +2,16 @@ import numpy as np
 import pyqtgraph as pg
 
 
+class Region:
+    def __init__(self, tlim, flim):
+        self.tlim = tlim
+        self.flim = flim
+        self.f0 = (
+            min(self.flim[0], self.flim[1])
+            + abs(self.flim[1] - self.flim[0]) / 2
+        )
+
+
 class Linked_ROIS:
     xlim: tuple[float, float]
     ylim: tuple[float, float]
@@ -9,7 +19,7 @@ class Linked_ROIS:
     ax_spgram: pg.PlotItem
     roi_signal: pg.LinearRegionItem
     roi_spgram: pg.RectROI
-    regions: list[tuple[tuple[float, float], float]]
+    regions: list[Region]
 
     def __init__(self, ax_signal: pg.PlotItem, ax_spgram: pg.PlotItem):
         self.regions = []
@@ -92,16 +102,10 @@ class Linked_ROIS:
         )
 
     def add_region(self):
-        self.regions.append(
-            (
-                self.xlim,
-                min(self.ylim[0], self.ylim[1])
-                + abs(self.ylim[1] - self.ylim[0]) / 2,
-            )
-        )
+        self.regions.append(Region(tlim=self.xlim, flim=self.ylim))
         self.ax_spgram.plot(
-            [self.regions[-1][0][0], self.regions[-1][0][1]],
-            [self.regions[-1][1], self.regions[-1][1]],
+            self.regions[-1].tlim,
+            [self.regions[-1].f0, self.regions[-1].f0],
             pen=pg.mkPen("r", width=2),
         )
 
