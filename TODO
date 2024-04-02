@@ -1,0 +1,12 @@
+
+High priority:
+
+☐ Add method to Lomb to save mapa and ns, ms
+☐ Add method to load mapa, ns, ms (maybe to lomb_periodogram lib?)
+☐ Add helical lomb
+  ☐ Function
+  ☐ Orientation dropdown list
+
+Med priority:
+
+Low priority:
