@@ -1,4 +1,4 @@
-.PHONY : run build configure rebuild_ui clean remove_env deep_clean
+.PHONY : run build configure rebuild_ui clean remove_env deep_clean env
 ACTIVATE_VENV = . ./env/bin/activate
 PYTHON = python3
 
