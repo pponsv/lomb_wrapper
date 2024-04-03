@@ -8,7 +8,7 @@ from . import utils
 from . import class_signal_arrays
 from .ui.ui_mainwindow import Ui_MainWindow
 from .class_window_info import WindowInfo
-from .class_lomb import Lomb
+from .class_lomb import Lomb, ORIENTATION_TRANSLATION
 
 from lib import TJII_mirnov_array as tma
 
@@ -47,6 +47,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def init_ui(self):
         #   Figure Widget
         self.ui.figLayout.setBackground("w")
+        self.populate_helical_orientation()
 
         #   Validators
         self.ui.lowerTLim.setValidator(DOUBLE_VALIDATOR)
@@ -69,6 +70,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.filterButton.clicked.connect(self.plot_filtered)
         self.ui.makeLombButton.clicked.connect(self.make_lomb)
         self.ui.loadAllDataButton.clicked.connect(self.load_all_data)
+        self.ui.helicalBaseComboBox.currentIndexChanged.connect(
+            self.populate_helical_orientation
+        )
         #   Keypress Connections
         self.ui.shotNumberInput.returnPressed.connect(self.loadData)
         #   Menu bar
@@ -77,6 +81,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionMake_DMUSIC.triggered.connect(self.make_dmusic)
         self.ui.actionSet_configuration_folder.triggered.connect(
             self.set_config_folder
+        )
+
+    def populate_helical_orientation(self):
+        self.ui.helicalOrientationComboBox.clear()
+        self.ui.helicalOrientationComboBox.addItems(
+            ORIENTATION_TRANSLATION[self.ui.helicalBaseComboBox.currentText()]
         )
 
     def set_config_folder(self):
@@ -89,7 +99,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def make_lomb(self):
         lomb = Lomb(self.coilarr, self.array.linked_rois.regions)
-        lomb.make_lomb()
+        lomb.make_lomb(
+            self.ui.helicalBaseComboBox.currentText(),
+            self.ui.helicalOrientationComboBox.currentText(),
+        )
 
     def save_all_data(self):
         self.coilarr.write_hdf5(

@@ -1,7 +1,9 @@
 
 High priority:
 
-☐ Paths to configuration files
+☐ Default booz bases
+☐ Method to calculate booz bases
+☐ Paths to configuration files / results etc
 ☐ Add method to Lomb to save mapa and ns, ms
 ☐ Add method to load mapa, ns, ms (maybe to lomb_periodogram lib?)
 ☐ Add helical lomb
@@ -9,5 +11,8 @@ High priority:
   ☐ Orientation dropdown list
 
 Med priority:
+
+  ☐ Fix ROI limit bugs
+  ☐ Maybe change ROI drawing?
 
 Low priority:

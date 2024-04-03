@@ -21,14 +21,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
-     <widget class="GraphicsLayoutWidget" name="figLayout" native="true">
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_4"/>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QWidget" name="topwidget" native="true">
       <property name="sizePolicy">
@@ -247,67 +239,41 @@
        </size>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="1" column="1">
-        <widget class="QPushButton" name="fftButton">
+       <item row="1" column="19">
+        <widget class="QLineEdit" name="upperTLim">
          <property name="minimumSize">
           <size>
-           <width>50</width>
-           <height>0</height>
+           <width>70</width>
+           <height>22</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>50</width>
-           <height>16777215</height>
+           <width>70</width>
+           <height>22</height>
           </size>
          </property>
-         <property name="text">
-          <string>FFT</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="resizeROIButton">
-         <property name="text">
-          <string>Resize ROI</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="15">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>noverlap:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="integrateDataButton">
-         <property name="text">
-          <string>Integrate</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="8">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
+         <property name="baseSize">
           <size>
-           <width>40</width>
-           <height>20</height>
+           <width>70</width>
+           <height>22</height>
           </size>
          </property>
-        </spacer>
-       </item>
-       <item row="1" column="4">
-        <widget class="QPushButton" name="addRegionButton">
          <property name="text">
-          <string>Add Region</string>
+          <string>1250</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>Upper limit [ms]</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
-       <item row="1" column="10">
+       <item row="1" column="17">
         <widget class="QLineEdit" name="lowerTLim">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -344,27 +310,81 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="15">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="20">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>nperseg:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <widget class="QPushButton" name="removeLastRegionButton">
+         <property name="text">
+          <string>Remove Region</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="21">
+        <widget class="QLineEdit" name="spgramNperseg">
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>512</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>nperseg</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="resizeROIButton">
+         <property name="text">
+          <string>Resize ROI</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="addRegionButton">
+         <property name="text">
+          <string>Add Region</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="11">
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>t&lt;sub&gt;1&lt;/sub&gt;:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <string>Orientation:</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="9">
-        <widget class="QLabel" name="label_3">
+       <item row="1" column="13">
+        <widget class="QPushButton" name="makeLombButton">
          <property name="text">
-          <string>t&lt;sub&gt;0&lt;/sub&gt;:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <string>Make Periodograms</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="16">
+       <item row="1" column="23">
         <widget class="QLineEdit" name="spgramNoverlap">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -395,70 +415,13 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="12">
-        <widget class="QLineEdit" name="upperTLim">
-         <property name="minimumSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="baseSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
+       <item row="1" column="16">
+        <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>1250</string>
+          <string>t&lt;sub&gt;0&lt;/sub&gt;:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
-         </property>
-         <property name="placeholderText">
-          <string>Upper limit [ms]</string>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="14">
-        <widget class="QLineEdit" name="spgramNperseg">
-         <property name="maximumSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>512</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="placeholderText">
-          <string>nperseg</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="13">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>nperseg:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="7">
-        <widget class="QPushButton" name="makeLombButton">
-         <property name="text">
-          <string>Make Periodograms</string>
          </property>
         </widget>
        </item>
@@ -475,14 +438,40 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="5">
-        <widget class="QPushButton" name="removeLastRegionButton">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="fftButton">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="text">
-          <string>Remove Region</string>
+          <string>FFT</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="6">
+       <item row="1" column="22">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>noverlap:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="integrateDataButton">
+         <property name="text">
+          <string>Integrate</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
         <spacer name="horizontalSpacer_5">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -495,7 +484,100 @@
          </property>
         </spacer>
        </item>
+       <item row="1" column="12">
+        <widget class="QComboBox" name="helicalOrientationComboBox">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>T</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>P</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>R</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="10">
+        <widget class="QComboBox" name="helicalBaseComboBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Booz_sup</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Booz_sub</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Design</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="18">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>t&lt;sub&gt;1&lt;/sub&gt;:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="8">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Helical - Base:</string>
+         </property>
+        </widget>
+       </item>
       </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="GraphicsLayoutWidget" name="figLayout" native="true">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4"/>
      </widget>
     </item>
    </layout>
