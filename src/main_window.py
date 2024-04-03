@@ -41,6 +41,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.daq_dialog = QtWidgets.QDialog()
         self.show()
 
+        #   Init paths
+        paths.set_config_folder(paths.CONFIG_PATH)
+
     def init_ui(self):
         #   Figure Widget
         self.ui.figLayout.setBackground("w")
@@ -60,8 +63,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.loadDataButton.clicked.connect(self.loadData)
         self.ui.fftButton.clicked.connect(self.makeFfts)
         self.ui.integrateDataButton.clicked.connect(self.integrateData)
-        self.ui.loadDmusicButton.clicked.connect(self.load_dmusic)
-        self.ui.makeDmusicButton.clicked.connect(self.make_dmusic)
         self.ui.addRegionButton.clicked.connect(self.add_region)
         self.ui.removeLastRegionButton.clicked.connect(self.remove_last_region)
         self.ui.resizeROIButton.clicked.connect(self.resize_roi)
@@ -72,6 +73,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.shotNumberInput.returnPressed.connect(self.loadData)
         #   Menu bar
         self.ui.actionSave_figure.triggered.connect(self.savefig)
+        self.ui.actionLoad_DMUSIC.triggered.connect(self.load_dmusic)
+        self.ui.actionMake_DMUSIC.triggered.connect(self.make_dmusic)
+        self.ui.actionSet_configuration_folder.triggered.connect(
+            self.set_config_folder
+        )
+
+    def set_config_folder(self):
+        folder = str(
+            QtWidgets.QFileDialog.getExistingDirectory(
+                self, "Select Directory", dir=paths.CONFIG_PATH
+            )
+        )
+        paths.set_config_folder(folder)
 
     def make_lomb(self):
         lomb = Lomb(self.coilarr, self.array.linked_rois.regions)
@@ -79,7 +93,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def save_all_data(self):
         self.coilarr.write_hdf5(
-            f"{paths.DATA_PATH}/.mirnov__{self.info.shot}.h5"
+            f"{paths.DATA_PATH()}/.mirnov__{self.info.shot}.h5"
         )
 
     def load_all_data(self):
@@ -89,9 +103,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.coilarr = tma.TJII_Mirnov_Arrays(self.info.shot)
         try:
             # self.coilarr.read_hdf5(
-            #     filename=f"{paths.DATA_PATH}/.mirnov__{self.info.shot}.h5"
+            #     filename=f"{paths.DATA_PATH()}/.mirnov__{self.info.shot}.h5"
             # )
-            self.coilarr.read_hdf5(initialdir=paths.DATA_PATH)
+            self.coilarr.read_hdf5(initialdir=paths.DATA_PATH())
         except:
             self.coilarr.load_rawdata(self.info.shot)
 
@@ -147,8 +161,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def load_dmusic(self):
         path = QtWidgets.QFileDialog.getOpenFileName(
             parent=self,
-            caption="Open File",
-            dir=paths.DMUSIC_PATH,
+            caption="Select DMUSIC file",
+            dir=paths.DMUSIC_PATH(),
             filter="All Files (*.*);;HDF5 files (*.h5 *.hdf5)",
             selectedFilter="HDF5 files (*.h5 *.hdf5)",
         )[0]
@@ -172,7 +186,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def make_dmusic(self):
         filedir = str(
             QtWidgets.QFileDialog.getExistingDirectory(
-                self, "Select Directory", dir=paths.DMUSIC_PATH
+                self, "Select DMUSIC directory", dir=paths.DMUSIC_PATH()
             )
         )
         print(filedir)

@@ -15,7 +15,7 @@ class Lomb:
     ):
         self.coilarr = coilarr
         self.roilist = roilist
-        self.coilarr.polarr.get_calfacs(paths.POLOIDAL_CALIBRATION_PATH)
+        self.coilarr.polarr.get_calfacs(paths.POLOIDAL_CALIBRATION_PATH())
 
     def make_lomb(self):
         for roi in self.roilist:

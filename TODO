@@ -1,6 +1,7 @@
 
 High priority:
 
+☐ Paths to configuration files
 ☐ Add method to Lomb to save mapa and ns, ms
 ☐ Add method to load mapa, ns, ms (maybe to lomb_periodogram lib?)
 ☐ Add helical lomb
