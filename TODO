@@ -4,8 +4,9 @@ High priority:
 ☐ Default booz bases
 ☐ Method to calculate booz bases
 ☐ Paths to configuration files / results etc
-☐ Add method to Lomb to save mapa and ns, ms
-☐ Add method to load mapa, ns, ms (maybe to lomb_periodogram lib?)
+☐ Rewrite lomb to save hdf of data
+  ✔ Add method to Lomb to save mapa and ns, ms
+  ✔ Add method to load mapa, ns, ms (maybe to lomb_periodogram lib?)
 ☐ Add helical lomb
   ☐ Function
   ☐ Orientation dropdown list

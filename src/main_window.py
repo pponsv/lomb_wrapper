@@ -10,7 +10,8 @@ from .ui.ui_mainwindow import Ui_MainWindow
 from .class_window_info import WindowInfo
 from .class_lomb import Lomb, ORIENTATION_TRANSLATION
 
-from lib import TJII_mirnov_array as tma
+import TJII_mirnov_array as tma
+import vmec_utils as vl
 
 
 DOUBLE_VALIDATOR = QtGui.QRegularExpressionValidator(
@@ -114,13 +115,17 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.info.shot is None:
             return
         self.coilarr = tma.TJII_Mirnov_Arrays(self.info.shot)
+        self.booz = vl.Booz(paths.BOOZER_PATH())
+        self.coilarr.calculate_bases(self.booz)  # type: ignore
         try:
-            # self.coilarr.read_hdf5(
-            #     filename=f"{paths.DATA_PATH()}/.mirnov__{self.info.shot}.h5"
-            # )
-            self.coilarr.read_hdf5(initialdir=paths.DATA_PATH())
+            self.coilarr.read_hdf5(
+                filename=f"{paths.DATA_PATH()}/mirnov__{self.info.shot}.hdf5"
+            )
         except:
-            self.coilarr.load_rawdata(self.info.shot)
+            try:
+                self.coilarr.read_hdf5(initialdir=paths.DATA_PATH())
+            except:
+                self.coilarr.load_rawdata(self.info.shot)
 
     def get_last_shot(self):
         def write_shot(info):

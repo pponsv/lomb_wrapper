@@ -7,7 +7,8 @@ from .class_linked_rois import Linked_ROIS
 from .qt_workers import Worker
 from .class_window_info import WindowInfo
 from .utils import PEN_BLACK, COLORMAP
-from lib import py_dmusic
+
+import py_dmusic
 
 
 class Signal_Spgram:

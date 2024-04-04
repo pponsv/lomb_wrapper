@@ -5,7 +5,8 @@ from pyqtgraph.exporters import ImageExporter
 from auxfiles.signal_names import SIGNAL_NAMES
 
 from scipy.signal import buttord, butter, sosfilt
-from lib import TJII_data_acquisition as da
+
+import TJII_data_acquisition as da
 
 
 PEN_BLACK = pg.mkPen(color="#000000", width=1)

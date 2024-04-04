@@ -1,11 +1,11 @@
-from lib import TJII_data_acquisition as da
-
-
 import numpy as np
 import pyqtgraph as pg
 from scipy.integrate import cumulative_trapezoid
 from scipy.signal import spectrogram
+
 from .utils import bandpass_filter_vec, PEN_BLACK, COLORMAP
+
+import TJII_data_acquisition as da
 
 
 class Signal:

@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from lib import lomb_periodogram as lp
-from lib import TJII_mirnov_array as tma
+import lomb_periodogram as lp
+import TJII_mirnov_array as tma
 from .class_linked_rois import Region
 from . import paths
 
@@ -33,6 +33,7 @@ class Lomb:
         self.coilarr = coilarr
         self.roilist = roilist
         self.coilarr.polarr.get_calfacs(paths.POLOIDAL_CALIBRATION_PATH())
+        self.coilarr.torarr.get_calfacs(paths.HELICAL_CALIBRATION_PATH())
 
     def make_lomb(self, base_str: str, orientation):
         base_str = BASE_TRANSLATION[base_str]
@@ -45,13 +46,8 @@ class Lomb:
         times, signals, thetas, phis = self.coilarr.polarr.make_lomb_arrays(
             tlim=roi.tlim, flim=roi.flim
         )
-        mapa = lp.easylomb3_difftimes(
-            times, thetas, phis, signals, roi.f0, NS, MS
-        )
-        fig, ax = plt.subplots(1, 2, figsize=(10, 5))
         title = f"Shot {self.coilarr.shot}, poloidal, f0 = {roi.f0:.2f} kHz, tlim=({roi.tlim[0]:.2f}, {roi.tlim[1]:.2f})"
-        ax[0].plot(times, signals + 10 * thetas, "-", ms=1, lw=0.1)
-        lp.plotmapa_alone_new(mapa, NS, MS, ax[1], title=title)
+        self.make_lomb_wrap(times, signals, thetas, phis, roi.f0, title)
 
     def make_lomb_helical(self, roi: Region, base_str: str, orientation: str):
         times, signals, thetas, phis = self.coilarr.torarr.make_lomb_arrays(
@@ -60,10 +56,21 @@ class Lomb:
             base_str=base_str,
             orientation=orientation,
         )
-        mapa = lp.easylomb3_difftimes(
-            times, thetas, phis, signals, roi.f0, NS, MS
-        )
-        fig, ax = plt.subplots(1, 2, figsize=(10, 5))
         title = f"Shot {self.coilarr.shot}, helical {base_str} {orientation}, f0 = {roi.f0:.2f} kHz, tlim=({roi.tlim[0]:.2f}, {roi.tlim[1]:.2f})"
+        self.make_lomb_wrap(times, signals, thetas, phis, roi.f0, title)
+
+    @staticmethod
+    def make_lomb_wrap(times, signals, thetas, phis, f0, title):
+        lomb = lp.Lomb_vec(
+            time=times,
+            thetas=thetas,
+            phis=phis,
+            sigs=signals,
+            nmax=NMAX,
+            mmax=MMAX,
+        )
+        lomb.easylomb3_difftimes(f0)
+        fig, ax = plt.subplots(1, 2, figsize=(10, 5))
         ax[0].plot(times, signals + 10 * thetas, "-", ms=1, lw=0.1)
-        lp.plotmapa_alone_new(mapa, NS, MS, ax[1], title=title)
+        lomb.plotmapa(ax[1])
+        fig.suptitle(title)
