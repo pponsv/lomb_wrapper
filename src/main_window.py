@@ -124,6 +124,7 @@ class MainWindow(QtWidgets.QMainWindow):
         except:
             try:
                 self.coilarr.read_hdf5(initialdir=paths.DATA_PATH())
+                self.ui.shotNumberInput.setText(str(self.coilarr.shot))
             except:
                 self.coilarr.load_rawdata(self.info.shot)
 
