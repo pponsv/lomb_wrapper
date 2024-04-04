@@ -90,3 +90,12 @@ class Lomb:
         assert (lomb1.ns == lomb2.ns).all(), "Different ns"
         assert (lomb1.ms == lomb2.ms).all(), "Different ms"
         return lomb1.mapa * lomb2.mapa
+
+    def save(self, datapath: str):
+        for (l_pol, l_hel), roi in zip(self.lombs, self.roilist):
+            l_pol.to_hdf(
+                f"{datapath}/lomb_pol__{l_pol.f0:.2f}__{roi.tlim[0]:.2f}_{roi.tlim[1]:.2f}.hdf5"
+            )
+            l_hel.to_hdf(
+                f"{datapath}/lomb_hel__{l_hel.f0:.2f}__{roi.tlim[0]:.2f}_{roi.tlim[1]:.2f}.hdf5"
+            )

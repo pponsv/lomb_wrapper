@@ -104,6 +104,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.helicalBaseComboBox.currentText(),
             self.ui.helicalOrientationComboBox.currentText(),
         )
+        if self.ui.saveLombCheckBox.isChecked():
+            lomb.save(paths.LOMB_OUTPUT_PATH())
 
     def save_all_data(self):
         self.coilarr.write_hdf5(
