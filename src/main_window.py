@@ -115,7 +115,14 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.info.shot is None:
             return
         self.coilarr = tma.TJII_Mirnov_Arrays(self.info.shot)
-        self.booz = vl.Booz(paths.BOOZER_PATH())
+        boozfile = QtWidgets.QFileDialog.getOpenFileName(
+            parent=self,
+            caption="Select Boozmn file",
+            dir=paths.BOOZER_PATH(),
+            filter="Boozmn files (*.nc)",
+            selectedFilter="Boozmn files (*.nc)",
+        )[0]
+        self.booz = vl.Booz(boozfile)
         self.coilarr.calculate_bases(self.booz)  # type: ignore
         try:
             self.coilarr.read_hdf5(

@@ -11,7 +11,7 @@ HELICAL_CALIBRATION_PATH = (
 )
 DATA_PATH = lambda: f"{CONFIG_PATH}/mirnov_hdfs"
 LOMB_OUTPUT_PATH = lambda: f"{CONFIG_PATH}/lomb_output"
-BOOZER_PATH = lambda: f"{CONFIG_PATH}/boozer/boozmn.nc"
+BOOZER_PATH = lambda: f"{CONFIG_PATH}/boozer/"
 
 
 def set_config_folder(folder):
