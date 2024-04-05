@@ -19,7 +19,6 @@ env:
 rebuild_ui: 
 	mkdir -p src/ui/
 	$(ACTIVATE_VENV); pyside6-uic ./ui/MainWindow.ui -o ./src/ui/ui_mainwindow.py
-	$(ACTIVATE_VENV); pyside6-uic ./ui/ListDialog.ui -o ./src/ui/ui_listdialog.py
 
 configure: 
 	$(MAKE) env

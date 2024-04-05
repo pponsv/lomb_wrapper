@@ -1,5 +1,4 @@
 from PySide6 import QtGui, QtCore, QtWidgets
-from matplotlib.pylab import f
 
 from auxfiles.signal_names import SIGNAL_NAMES
 from . import paths
@@ -8,7 +7,8 @@ from . import utils
 from . import class_signal_arrays
 from .ui.ui_mainwindow import Ui_MainWindow
 from .class_window_info import WindowInfo
-from .class_lomb import Lomb, ORIENTATION_TRANSLATION
+from .class_lomb import Lomb, ORIENTATION_TRANSLATION, BASE_TRANSLATION
+from .class_polarization import Polarization
 
 import TJII_mirnov_array as tma
 import vmec_utils as vl
@@ -71,6 +71,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.filterButton.clicked.connect(self.plot_filtered)
         self.ui.makeLombButton.clicked.connect(self.make_lomb)
         self.ui.loadAllDataButton.clicked.connect(self.load_all_data)
+        self.ui.saveAllDataButton.clicked.connect(self.save_all_data)
+        self.ui.polarizationButton.clicked.connect(
+            self.make_polarization_plots
+        )
         self.ui.helicalBaseComboBox.currentIndexChanged.connect(
             self.populate_helical_orientation
         )
@@ -98,6 +102,14 @@ class MainWindow(QtWidgets.QMainWindow):
         )
         paths.set_config_folder(folder)
 
+    def make_polarization_plots(self):
+        self.info.refresh()
+        pol_obj = Polarization(
+            self.coilarr,
+            self.array.linked_rois.regions[-1],
+            self.ui.helicalBaseComboBox.currentText(),
+        ).plot()
+
     def make_lomb(self):
         lomb = Lomb(self.coilarr, self.array.linked_rois.regions)
         lomb.make_lomb(
@@ -109,7 +121,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def save_all_data(self):
         self.coilarr.write_hdf5(
-            f"{paths.DATA_PATH()}/.mirnov__{self.info.shot}.h5"
+            f"{paths.DATA_PATH()}/.mirnov__{self.info.shot}.hdf5"
         )
 
     def load_all_data(self):

@@ -14,7 +14,7 @@ MS = np.arange(-MMAX, MMAX + 1)
 BASE_TRANSLATION = {
     "Booz_sup": "sup",
     "Booz_sub": "sub",
-    "Design": "normals_th",
+    "Design": "normal_th",
 }
 
 ORIENTATION_TRANSLATION = {
