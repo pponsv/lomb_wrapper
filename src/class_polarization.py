@@ -30,8 +30,10 @@ class Polarization:
             )
 
     def plot(self):
+        figs = {}
+        axes = {}
         for ori in self.sigs:
-            fig, axes = plt.subplots(
+            figs[ori]["upper"], axes[ori]["upper"] = plt.subplots(
                 5,
                 7,
                 constrained_layout=True,
@@ -40,16 +42,27 @@ class Polarization:
                 sharey=True,
                 subplot_kw=dict(box_aspect=1),
             )
-            fig.suptitle(
-                f"Shot {self.coilarr.shot}, helical, {self.base}, {ori}"
+            figs[ori]["lower"], axes[ori]["lower"] = plt.subplots(
+                5,
+                7,
+                constrained_layout=True,
+                figsize=(12, 9),
+                sharex=True,
+                sharey=True,
+                subplot_kw=dict(box_aspect=1),
             )
-            for idx, (ax, key) in enumerate(zip(axes.flatten(), self.sigs)):
-                ax.plot(
-                    self.sigs[ori][ori[0]],
+            for subarr in figs[ori]:
+                figs[ori][subarr].suptitle(
+                    f"Shot {self.coilarr.shot}, helical, {self.base}, {ori}, {subarr}"
+                )
+            for idx, key in enumerate(self.sigs):
+                print(key)
+                axes[ori][subarr].plot(
+                    self.sigs[key][ori[0]],
                     self.sigs[key][ori[1]],
                     ".k",
                 )
-                ax.set(title=key.icoil)
+                axes[ori][subarr].set(title=key.icoil)
             # axes[0, 0].set_aspect("equal")
             plt.show(block=False)
 

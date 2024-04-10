@@ -2,18 +2,21 @@
 High priority:
 
 ☐ Default booz bases
-✔ Method to calculate booz bases
-✔ Paths to configuration files / results etc
-☐ Rewrite lomb to save hdf of data
-  ✔ Add method to Lomb to save mapa and ns, ms
-  ✔ Add method to load mapa, ns, ms (maybe to lomb_periodogram lib?)
-☐ Add helical lomb
-  ☐ Function
-  ☐ Orientation dropdown list
+☐ Function
+☐ Orientation dropdown list
+☐ Polarization: improve
 
 Med priority:
-
-  ☐ Fix ROI limit bugs
-  ☐ Maybe change ROI drawing?
-
+  
+☐ Fix ROI limit bugs
+☐ Maybe change ROI drawing?
+  
 Low priority:
+    
+Done:
+✔ Method to calculate booz bases
+✔ Paths to configuration files / results etc
+✔ Rewrite lomb to save hdf of data
+  ✔ Add method to Lomb to save mapa and ns, ms
+  ✔ Add method to load mapa, ns, ms (maybe to lomb_periodogram lib?)
+✔ Add helical lomb
