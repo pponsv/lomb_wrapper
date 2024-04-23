@@ -147,7 +147,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.coilarr.read_hdf5(initialdir=paths.DATA_PATH())
                 self.ui.shotNumberInput.setText(str(self.coilarr.shot))
             except:
-                self.coilarr.load_rawdata(self.info.shot)
+                self.coilarr = self.coilarr.load_rawdata(self.info.shot)
 
     def get_last_shot(self):
         def write_shot(info):
