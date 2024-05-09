@@ -137,7 +137,6 @@ class MainWindow(QtWidgets.QMainWindow):
             selectedFilter="Boozmn files (*.nc)",
         )[0]
         self.booz = vl.Booz(boozfile)
-        self.coilarr.calculate_bases(self.booz)  # type: ignore
         try:
             self.coilarr.read_hdf5(
                 filename=f"{paths.DATA_PATH()}/mirnov__{self.info.shot}.hdf5"
@@ -148,6 +147,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.shotNumberInput.setText(str(self.coilarr.shot))
             except:
                 self.coilarr = self.coilarr.load_rawdata(self.info.shot)
+        self.coilarr.calculate_bases(self.booz)  # type: ignore
 
     def get_last_shot(self):
         def write_shot(info):
