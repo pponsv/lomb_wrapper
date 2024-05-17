@@ -20,9 +20,11 @@ class Linked_ROIS:
     roi_signal: pg.LinearRegionItem
     roi_spgram: pg.RectROI
     regions: list[Region]
+    updating: list[bool]
 
     def __init__(self, ax_signal: pg.PlotItem, ax_spgram: pg.PlotItem):
         self.regions = []
+        self.updating = [False, False]
         self.ax_signal = ax_signal
         self.ax_spgram = ax_spgram
         self.xlim = (0, 1)
@@ -33,7 +35,7 @@ class Linked_ROIS:
         #   Get initial limits
         self.resize_roi()
         #   Connect signals
-        self.roi_signal.sigRegionChangeFinished.connect(self.update_spgram)
+        self.roi_signal.sigRegionChanged.connect(self.update_spgram)
         self.roi_spgram.sigRegionChanged.connect(self.update_signal)
         self.ax_signal.sigRangeChanged.connect(self.update_signal_range)
 
@@ -78,15 +80,23 @@ class Linked_ROIS:
         )
 
     def update_signal(self):
+        if self.updating[1]:
+            return
+        self.updating[1] = True
         pos_spgram = self.roi_spgram.pos()
         size_spgram = self.roi_spgram.size()
         self.xlim = (pos_spgram[0], pos_spgram[0] + size_spgram[0])
         self.ylim = (pos_spgram[1], pos_spgram[1] + size_spgram[1])
         self.redraw_signal()
+        self.updating[1] = False
 
     def update_spgram(self):
+        if self.updating[0]:
+            return
+        self.updating[0] = True
         self.xlim = self.roi_signal.getRegion()  # type: ignore
         self.redraw_spgram()
+        self.updating[0] = False
 
     def update_signal_range(self):
         x0, x1 = self.ax_signal.viewRange()[0]
