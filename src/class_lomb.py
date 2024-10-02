@@ -18,8 +18,8 @@ BASE_TRANSLATION = {
 }
 
 ORIENTATION_TRANSLATION = {
-    "Booz_sup": ["ph", "th", "s"],
-    "Booz_sub": ["ph", "th", "s"],
+    "Booz_sup": ["s", "th", "ph"],
+    "Booz_sub": ["th", "ph", "s"],
     "Design": ["T", "P", "R"],
 }
 
