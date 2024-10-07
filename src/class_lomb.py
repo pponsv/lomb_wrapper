@@ -31,12 +31,14 @@ class Lomb:
         self,
         coilarr: tma.TJII_Mirnov_Arrays,
         roilist: list[Region],
+        plot=False,
     ):
         self.coilarr = coilarr
         self.roilist = roilist
         self.coilarr.polarr.get_calfacs(paths.POLOIDAL_CALIBRATION_PATH())
         self.coilarr.torarr.get_calfacs(paths.HELICAL_CALIBRATION_PATH())
         self.lombs = []
+        self.plot = plot
 
     def make_lomb(self, base_str: str, orientation):
         base_str = BASE_TRANSLATION[base_str]
@@ -45,8 +47,9 @@ class Lomb:
             lomb_hel = self.make_lomb_helical(roi, base_str, orientation)
             self.lombs.append((lomb_pol, lomb_hel))
             prod_mapa = self.lomb_product(lomb_hel, lomb_pol)
-            fig, ax = plt.subplots(1, 1, figsize=(5, 5))
-            lp.plots.plotmapa_alone_ax(prod_mapa, NS, MS, ax=ax)
+            if self.plot is True:
+                fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+                lp.plots.plotmapa_alone_ax(prod_mapa, NS, MS, ax=ax)
         plt.show(block=False)
 
     def make_lomb_poloidal(self, roi: Region):
@@ -54,7 +57,9 @@ class Lomb:
             tlim=roi.tlim, flim=roi.flim
         )
         title = f"Shot {self.coilarr.shot}, poloidal, f0 = {roi.f0:.2f} kHz, tlim=({roi.tlim[0]:.2f}, {roi.tlim[1]:.2f})"
-        lomb = self.make_lomb_wrap(times, signals, thetas, phis, roi.f0, title)
+        lomb = self.make_lomb_wrap(
+            times, signals, thetas, phis, roi.f0, title, plot=self.plot
+        )
         return lomb
 
     def make_lomb_helical(self, roi: Region, base_str: str, orientation: str):
@@ -65,11 +70,13 @@ class Lomb:
             orientation=orientation,
         )
         title = f"Shot {self.coilarr.shot}, helical {base_str} {orientation}, f0 = {roi.f0:.2f} kHz, tlim=({roi.tlim[0]:.2f}, {roi.tlim[1]:.2f})"
-        lomb = self.make_lomb_wrap(times, signals, thetas, phis, roi.f0, title)
+        lomb = self.make_lomb_wrap(
+            times, signals, thetas, phis, roi.f0, title, plot=self.plot
+        )
         return lomb
 
     @staticmethod
-    def make_lomb_wrap(times, signals, thetas, phis, f0, title):
+    def make_lomb_wrap(times, signals, thetas, phis, f0, title, plot=False):
         lomb = lp.Lomb_vec(
             time=times,
             thetas=thetas,
@@ -79,10 +86,11 @@ class Lomb:
             mmax=MMAX,
         )
         lomb.easylomb3_difftimes(f0)
-        fig, ax = plt.subplots(1, 2, figsize=(10, 5))
-        ax[0].plot(times, signals + 10 * thetas, "-", ms=1, lw=0.1)
-        lomb.plotmapa(ax[1])
-        fig.suptitle(title)
+        if plot is True:
+            fig, ax = plt.subplots(1, 2, figsize=(10, 5))
+            ax[0].plot(times, signals + 10 * thetas, "-", ms=1, lw=0.1)
+            lomb.plotmapa(ax[1])
+            fig.suptitle(title)
         return lomb
 
     @staticmethod

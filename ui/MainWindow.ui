@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>800</height>
+    <width>1460</width>
+    <height>882</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -273,7 +273,128 @@
        </size>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="1" column="19">
+       <item row="1" column="3">
+        <widget class="QPushButton" name="resizeROIButton">
+         <property name="text">
+          <string>Resize ROI</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="8">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Helical - Base:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="24">
+        <widget class="QLineEdit" name="spgramNoverlap">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>500</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>noverlap</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="10">
+        <widget class="QComboBox" name="helicalBaseComboBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Booz_sup</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Booz_sub</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Design</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="16">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="fftButton">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>FFT</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <widget class="QPushButton" name="removeLastRegionButton">
+         <property name="text">
+          <string>Remove Region</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="20">
         <widget class="QLineEdit" name="upperTLim">
          <property name="minimumSize">
           <size>
@@ -307,71 +428,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="17">
-        <widget class="QLineEdit" name="lowerTLim">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="baseSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>1050</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="placeholderText">
-          <string>Lower limit [ms]</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="15">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="20">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>nperseg:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="5">
-        <widget class="QPushButton" name="removeLastRegionButton">
-         <property name="text">
-          <string>Remove Region</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="21">
+       <item row="1" column="22">
         <widget class="QLineEdit" name="spgramNperseg">
          <property name="maximumSize">
           <size>
@@ -390,77 +447,18 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="resizeROIButton">
+       <item row="1" column="19">
+        <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>Resize ROI</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QPushButton" name="addRegionButton">
-         <property name="text">
-          <string>Add Region</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="11">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Orientation:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="13">
-        <widget class="QPushButton" name="makeLombButton">
-         <property name="text">
-          <string>Make Periodograms</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="23">
-        <widget class="QLineEdit" name="spgramNoverlap">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>70</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>500</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="placeholderText">
-          <string>noverlap</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="16">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>t&lt;sub&gt;0&lt;/sub&gt;:</string>
+          <string>t&lt;sub&gt;1&lt;/sub&gt;:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <spacer name="horizontalSpacer_4">
+       <item row="1" column="7">
+        <spacer name="horizontalSpacer_5">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -472,29 +470,17 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="fftButton">
-         <property name="minimumSize">
-          <size>
-           <width>50</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>50</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>FFT</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="22">
+       <item row="1" column="23">
         <widget class="QLabel" name="label_7">
          <property name="text">
           <string>noverlap:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="13">
+        <widget class="QPushButton" name="makeLombButton">
+         <property name="text">
+          <string>Make Periodograms</string>
          </property>
         </widget>
        </item>
@@ -505,8 +491,8 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="7">
-        <spacer name="horizontalSpacer_5">
+       <item row="1" column="2">
+        <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -549,57 +535,71 @@
          </item>
         </widget>
        </item>
-       <item row="1" column="10">
-        <widget class="QComboBox" name="helicalBaseComboBox">
+       <item row="1" column="11">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Orientation:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="18">
+        <widget class="QLineEdit" name="lowerTLim">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>90</width>
-           <height>0</height>
+           <width>70</width>
+           <height>22</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>90</width>
-           <height>16777215</height>
+           <width>70</width>
+           <height>22</height>
           </size>
          </property>
-         <item>
-          <property name="text">
-           <string>Booz_sup</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Booz_sub</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Design</string>
-          </property>
-         </item>
+         <property name="baseSize">
+          <size>
+           <width>70</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>1050</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>Lower limit [ms]</string>
+         </property>
         </widget>
        </item>
-       <item row="1" column="18">
-        <widget class="QLabel" name="label_5">
+       <item row="1" column="17">
+        <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>t&lt;sub&gt;1&lt;/sub&gt;:</string>
+          <string>t&lt;sub&gt;0&lt;/sub&gt;:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="8">
-        <widget class="QLabel" name="label_2">
+       <item row="1" column="21">
+        <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>Helical - Base:</string>
+          <string>nperseg:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="addRegionButton">
+         <property name="text">
+          <string>Add Region</string>
          </property>
         </widget>
        </item>
@@ -607,6 +607,13 @@
         <widget class="QCheckBox" name="saveLombCheckBox">
          <property name="text">
           <string>Save</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="15">
+        <widget class="QCheckBox" name="plotLombCheckBox">
+         <property name="text">
+          <string>Plot</string>
          </property>
         </widget>
        </item>
@@ -628,7 +635,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1280</width>
+     <width>1460</width>
      <height>19</height>
     </rect>
    </property>

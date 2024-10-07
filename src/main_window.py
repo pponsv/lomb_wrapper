@@ -81,6 +81,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.getFlimButton.clicked.connect(self.get_flim_from_roi)
         #   Keypress Connections
         self.ui.shotNumberInput.returnPressed.connect(self.loadData)
+        # self.keyPressEvent.connect(self.fig_keypress)
         #   Menu bar
         self.ui.actionSave_figure.triggered.connect(self.savefig)
         self.ui.actionLoad_DMUSIC.triggered.connect(self.load_dmusic)
@@ -97,6 +98,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.helicalOrientationComboBox.addItems(
             ORIENTATION_TRANSLATION[self.ui.helicalBaseComboBox.currentText()]
         )
+
+    def keyPressEvent(self, ev):
+        if ev.key() == QtCore.Qt.Key.Key_F5:
+            self.array.linked_rois.add_region()
 
     def set_config_folder(self):
         folder = str(
@@ -126,7 +131,11 @@ class MainWindow(QtWidgets.QMainWindow):
         ).plot()
 
     def make_lomb(self):
-        lomb = Lomb(self.coilarr, self.array.linked_rois.regions)
+        lomb = Lomb(
+            self.coilarr,
+            self.array.linked_rois.regions,
+            plot=self.ui.plotLombCheckBox.isChecked(),
+        )
         lomb.make_lomb(
             self.ui.helicalBaseComboBox.currentText(),
             self.ui.helicalOrientationComboBox.currentText(),
