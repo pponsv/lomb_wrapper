@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
 import lomb_periodogram as lp
 import TJII_mirnov_array as tma
 from .class_linked_rois import Region
@@ -92,10 +92,11 @@ class Lomb:
         return lomb1.mapa * lomb2.mapa
 
     def save(self, datapath: str):
+        os.makedirs(f"{datapath}/{self.coilarr.shot}", exist_ok=True)
         for (l_pol, l_hel), roi in zip(self.lombs, self.roilist):
             l_pol.to_hdf(
-                f"{datapath}/lomb_pol__{l_pol.f0:.2f}__{roi.tlim[0]:.2f}_{roi.tlim[1]:.2f}.hdf5"
+                f"{datapath}/{self.coilarr.shot}/lomb_pol__{l_pol.f0:.2f}__{roi.tlim[0]:.2f}_{roi.tlim[1]:.2f}.hdf5"
             )
             l_hel.to_hdf(
-                f"{datapath}/lomb_hel__{l_hel.f0:.2f}__{roi.tlim[0]:.2f}_{roi.tlim[1]:.2f}.hdf5"
+                f"{datapath}/{self.coilarr.shot}/lomb_hel__{l_hel.f0:.2f}__{roi.tlim[0]:.2f}_{roi.tlim[1]:.2f}.hdf5"
             )
