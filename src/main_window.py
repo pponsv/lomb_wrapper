@@ -87,6 +87,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionSet_configuration_folder.triggered.connect(
             self.set_config_folder
         )
+        self.ui.actionSet_boozer_angles.triggered.connect(
+            self.set_boozer_angles
+        )
 
     def populate_helical_orientation(self):
         self.ui.helicalOrientationComboBox.clear()
@@ -101,6 +104,12 @@ class MainWindow(QtWidgets.QMainWindow):
             )
         )
         paths.set_config_folder(folder)
+
+    def set_boozer_angles(self):
+        cdir = QtWidgets.QFileDialog.getExistingDirectory(
+            self, "Select Directory", dir=f"{paths.CONFIG_PATH}/boozangs/"
+        )
+        self.booz.set_booz_angles(cdir)
 
     def make_polarization_plots(self):
         self.info.refresh()

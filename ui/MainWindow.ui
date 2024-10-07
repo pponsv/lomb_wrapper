@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1600</width>
-    <height>900</height>
+    <width>1280</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -621,7 +621,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1600</width>
+     <width>1280</width>
      <height>19</height>
     </rect>
    </property>
@@ -634,6 +634,7 @@
     <addaction name="actionSet_configuration_folder"/>
     <addaction name="separator"/>
     <addaction name="actionSave_Mirnov"/>
+    <addaction name="actionSet_boozer_angles"/>
    </widget>
    <widget class="QMenu" name="menuDMUSIC">
     <property name="title">
@@ -674,6 +675,11 @@
   <action name="actionSave_Mirnov">
    <property name="text">
     <string>Save Mirnov</string>
+   </property>
+  </action>
+  <action name="actionSet_boozer_angles">
+   <property name="text">
+    <string>Set boozer angles</string>
    </property>
   </action>
  </widget>
