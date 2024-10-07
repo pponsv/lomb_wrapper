@@ -109,7 +109,7 @@ class MainWindow(QtWidgets.QMainWindow):
         cdir = QtWidgets.QFileDialog.getExistingDirectory(
             self, "Select Directory", dir=f"{paths.CONFIG_PATH}/boozangs/"
         )
-        self.booz.set_booz_angles(cdir)
+        self.coilarr.set_booz_angles(cdir)
 
     def make_polarization_plots(self):
         self.info.refresh()
