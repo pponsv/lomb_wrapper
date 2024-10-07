@@ -78,6 +78,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.helicalBaseComboBox.currentIndexChanged.connect(
             self.populate_helical_orientation
         )
+        self.ui.getFlimButton.clicked.connect(self.get_flim_from_roi)
         #   Keypress Connections
         self.ui.shotNumberInput.returnPressed.connect(self.loadData)
         #   Menu bar
@@ -104,6 +105,11 @@ class MainWindow(QtWidgets.QMainWindow):
             )
         )
         paths.set_config_folder(folder)
+
+    def get_flim_from_roi(self):
+        flim = sorted(self.array.linked_rois.ylim)
+        self.ui.filterFMin.setText(f"{flim[0]:.1f}")
+        self.ui.filterFMax.setText(f"{flim[1]:.1f}")
 
     def set_boozer_angles(self):
         cdir = QtWidgets.QFileDialog.getExistingDirectory(
@@ -156,6 +162,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.shotNumberInput.setText(str(self.coilarr.shot))
             except:
                 self.coilarr = self.coilarr.load_rawdata(self.info.shot)
+        self.set_boozer_angles()
         self.coilarr.calculate_bases(self.booz)  # type: ignore
 
     def get_last_shot(self):
