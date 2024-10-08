@@ -88,8 +88,8 @@ class Lomb:
         lomb.easylomb3_difftimes(f0)
         if plot is True:
             fig, ax = plt.subplots(1, 2, figsize=(10, 5))
-            ax[0].plot(times, signals + 10 * thetas, "-", ms=1, lw=0.1)
-            lomb.plotmapa(ax[1])
+            ax[0].plot(times, signals + 10 * thetas, "-", ms=1, lw=0.1)  # type: ignore
+            lomb.plotmapa(ax[1])  # type: ignore
             fig.suptitle(title)
         return lomb
 

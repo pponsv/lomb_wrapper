@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1460</width>
+    <width>1496</width>
     <height>882</height>
    </rect>
   </property>
@@ -297,7 +297,7 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>50</width>
            <height>22</height>
           </size>
          </property>
@@ -308,7 +308,7 @@
           </size>
          </property>
          <property name="text">
-          <string>500</string>
+          <string>1020</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -430,14 +430,20 @@
        </item>
        <item row="1" column="22">
         <widget class="QLineEdit" name="spgramNperseg">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
-           <width>70</width>
+           <width>80</width>
            <height>22</height>
           </size>
          </property>
          <property name="text">
-          <string>512</string>
+          <string>1024</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -635,7 +641,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1460</width>
+     <width>1496</width>
      <height>19</height>
     </rect>
    </property>

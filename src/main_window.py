@@ -1,4 +1,6 @@
 from PySide6 import QtGui, QtCore, QtWidgets
+import numpy as np
+import os
 
 from auxfiles.signal_names import SIGNAL_NAMES
 from . import paths
@@ -149,29 +151,40 @@ class MainWindow(QtWidgets.QMainWindow):
         )
 
     def load_all_data(self):
+        """
+        Loads a full shot, trying first to find the hdf5 file, then the raw data
+        from the TJII database.
+        Reads the Boozer file from the selected directory, and the pre-calculated
+        angle files from the same directory.
+        Also calculates the bases for the coils at the appropriate Boozer angles.
+        """
         self.info.refresh()
         if self.info.shot is None:
             return
         self.coilarr = tma.TJII_Mirnov_Arrays(self.info.shot)
-        boozfile = QtWidgets.QFileDialog.getOpenFileName(
-            parent=self,
-            caption="Select Boozmn file",
-            dir=paths.BOOZER_PATH(),
-            filter="Boozmn files (*.nc)",
-            selectedFilter="Boozmn files (*.nc)",
-        )[0]
-        self.booz = vl.Booz(boozfile)
+        cdir = QtWidgets.QFileDialog.getExistingDirectory(
+            self, "Select Directory", dir=f"{paths.CONFIG_PATH}/boozangs/"
+        )
+        boozfile = [f for f in os.listdir(cdir) if f.endswith(".nc")][0]
+        boozfile = f"{cdir}/{boozfile}"
+        print("Boozer file: ", boozfile)
+        self.booz = vl.Booz(
+            boozfile,
+            theta=np.linspace(0, 2 * np.pi, 10),
+            phi=np.linspace(0, 2 * np.pi, 10),
+        )
         try:
             self.coilarr.read_hdf5(
-                filename=f"{paths.DATA_PATH()}/mirnov__{self.info.shot}.hdf5"
+                filename=f"{paths.DATA_PATH()}/.mirnov__{self.info.shot}.hdf5"
             )
+            print("Loaded from hdf5")
         except:
             try:
                 self.coilarr.read_hdf5(initialdir=paths.DATA_PATH())
                 self.ui.shotNumberInput.setText(str(self.coilarr.shot))
             except:
                 self.coilarr = self.coilarr.load_rawdata(self.info.shot)
-        self.set_boozer_angles()
+        self.coilarr.set_booz_angles(cdir)
         self.coilarr.calculate_bases(self.booz)  # type: ignore
 
     def get_last_shot(self):
