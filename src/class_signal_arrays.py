@@ -107,10 +107,10 @@ class Signal_Spgram:
         self.dmusic = py_dmusic.DMusic(
             t=self.signal.t[mask],
             y=self.signal.x[mask],
-            poverlap=0.95,
-            N=400,
-            J=200,
-            K=30,
+            poverlap=0.98,
+            N=500,
+            J=250,
+            K=35,
             flim=self.linked_rois.ylim,
         )
         self.dmusic.spgram_dmusic()
