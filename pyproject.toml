@@ -1,0 +1,25 @@
+[project]
+name = "lomb_wrapper"
+version = "0.1.0"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "pyqtgraph",
+    "PySide6",
+    "scipy",
+    "tjii_data_acquisition @ git+https://github.com/pponsv/TJII_data_acquisition",
+    "vmec_utils @ git+https://github.com/pponsv/vmec_utils",
+    "py_dmusic @ git+https://github.com/pponsv/py_dmusic",
+    "tjii_mirnov_array @ git+https://github.com/pponsv/TJII_mirnov_array",
+    "lomb_periodogram @ git+https://github.com/pponsv/lomb_periodogram",
+]
+
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools"]
+
+[tool.setuptools.packages]
+find = { include = ["lomb_wrapper*"] }
+
+[project.scripts]
+lomb_wrapper = "lomb_wrapper.main:main"

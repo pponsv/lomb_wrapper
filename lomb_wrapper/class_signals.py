@@ -1,11 +1,10 @@
 import numpy as np
 import pyqtgraph as pg
+import TJII_data_acquisition as da
 from scipy.integrate import cumulative_trapezoid
 from scipy.signal import spectrogram
 
-from .utils import bandpass_filter_vec, PEN_BLACK, COLORMAP
-
-import TJII_data_acquisition as da
+from .utils import COLORMAP, PEN_BLACK, bandpass_filter_vec
 
 
 class Signal:
@@ -83,9 +82,7 @@ class Signal:
             ax.addItem(img)
             ax.setXRange(x0, x0 + w)
             ax.setYRange(y0, y0 + h)
-            cbar = ax.addColorBar(
-                img, colorMap=colormap, values=(-40, 0), width=0.25
-            )
+            cbar = ax.addColorBar(img, colorMap=colormap, values=(-40, 0), width=0.25)
             cbar.getAxis("right").setWidth(25)
 
     def filter(self, flim):

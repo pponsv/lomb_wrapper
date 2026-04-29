@@ -1,13 +1,12 @@
 import os
+
 import numpy as np
 import pyqtgraph as pg
-from pyqtgraph.exporters import ImageExporter
-from auxfiles.signal_names import SIGNAL_NAMES
-
-from scipy.signal import buttord, butter, sosfilt
-
 import TJII_data_acquisition as da
+from pyqtgraph.exporters import ImageExporter
+from scipy.signal import butter, buttord, sosfilt
 
+from .signal_names import SIGNAL_NAMES
 
 PEN_BLACK = pg.mkPen(color="#000000", width=1)
 COLORMAP = pg.colormap.get("CET-R4")

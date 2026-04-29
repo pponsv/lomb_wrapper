@@ -1,9 +1,9 @@
 from itertools import combinations
+
 import matplotlib.pyplot as plt
 import numpy as np
-
 import TJII_mirnov_array as tma
-from TJII_mirnov_array.src.utils.data import (
+from TJII_mirnov_array.utils.data import (
     bandpass_filter_vec,
     normalize_to_env,
 )
@@ -13,9 +13,7 @@ from .class_lomb import BASE_TRANSLATION, ORIENTATION_TRANSLATION
 
 
 class Polarization:
-    def __init__(
-        self, coilarr: tma.TJII_Mirnov_Arrays, roi: Region, base: str
-    ):
+    def __init__(self, coilarr: tma.TJII_Mirnov_Arrays, roi: Region, base: str):
         self.coilarr = coilarr
         self.roi = roi
         self.make_signal_arrays(base)

@@ -1,20 +1,16 @@
-from PySide6 import QtGui, QtCore, QtWidgets
-import numpy as np
 import os
 
-from auxfiles.signal_names import SIGNAL_NAMES
-from . import paths
-from . import qt_workers
-from . import utils
-from . import class_signal_arrays
-from .ui.ui_mainwindow import Ui_MainWindow
-from .class_window_info import WindowInfo
-from .class_lomb import Lomb, ORIENTATION_TRANSLATION, BASE_TRANSLATION
-from .class_polarization import Polarization
-
+import numpy as np
 import TJII_mirnov_array as tma
 import vmec_utils as vl
+from PySide6 import QtCore, QtGui, QtWidgets
 
+from . import class_signal_arrays, paths, qt_workers, utils
+from .class_lomb import BASE_TRANSLATION, ORIENTATION_TRANSLATION, Lomb
+from .class_polarization import Polarization
+from .class_window_info import WindowInfo
+from .signal_names import SIGNAL_NAMES
+from .ui_mainwindow import Ui_MainWindow
 
 DOUBLE_VALIDATOR = QtGui.QRegularExpressionValidator(
     QtCore.QRegularExpression("^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$")
@@ -74,9 +70,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.makeLombButton.clicked.connect(self.make_lomb)
         self.ui.loadAllDataButton.clicked.connect(self.load_all_data)
         self.ui.saveAllDataButton.clicked.connect(self.save_all_data)
-        self.ui.polarizationButton.clicked.connect(
-            self.make_polarization_plots
-        )
+        self.ui.polarizationButton.clicked.connect(self.make_polarization_plots)
         self.ui.helicalBaseComboBox.currentIndexChanged.connect(
             self.populate_helical_orientation
         )
@@ -88,12 +82,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionSave_figure.triggered.connect(self.savefig)
         self.ui.actionLoad_DMUSIC.triggered.connect(self.load_dmusic)
         self.ui.actionMake_DMUSIC.triggered.connect(self.make_dmusic)
-        self.ui.actionSet_configuration_folder.triggered.connect(
-            self.set_config_folder
-        )
-        self.ui.actionSet_boozer_angles.triggered.connect(
-            self.set_boozer_angles
-        )
+        self.ui.actionSet_configuration_folder.triggered.connect(self.set_config_folder)
+        self.ui.actionSet_boozer_angles.triggered.connect(self.set_boozer_angles)
 
     def populate_helical_orientation(self):
         self.ui.helicalOrientationComboBox.clear()
@@ -146,9 +136,7 @@ class MainWindow(QtWidgets.QMainWindow):
             lomb.save(paths.LOMB_OUTPUT_PATH())
 
     def save_all_data(self):
-        self.coilarr.write_hdf5(
-            f"{paths.DATA_PATH()}/.mirnov__{self.info.shot}.hdf5"
-        )
+        self.coilarr.write_hdf5(f"{paths.DATA_PATH()}/.mirnov__{self.info.shot}.hdf5")
 
     def load_all_data(self):
         """
@@ -197,7 +185,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def populate_boxes(self):
         self.ui.signalArraySelector.addItems(SIGNAL_NAMES)
-        self.get_last_shot()
+        # self.get_last_shot()
 
     def savefig(self):
         utils.save_figure(self.ui.figLayout.scene(), self.info)

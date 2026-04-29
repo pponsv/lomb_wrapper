@@ -1,5 +1,5 @@
+from .ui_mainwindow import Ui_MainWindow
 from .utils import get_value_from_field
-from .ui.ui_mainwindow import Ui_MainWindow
 
 
 class WindowInfo:

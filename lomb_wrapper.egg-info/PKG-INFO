@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: lomb_wrapper
+Version: 0.1.0
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: pyqtgraph
+Requires-Dist: PySide6
+Requires-Dist: scipy
+Requires-Dist: tjii_data_acquisition @ git+https://github.com/pponsv/TJII_data_acquisition
+Requires-Dist: vmec_utils @ git+https://github.com/pponsv/vmec_utils
+Requires-Dist: py_dmusic @ git+https://github.com/pponsv/py_dmusic
+Requires-Dist: tjii_mirnov_array @ git+https://github.com/pponsv/TJII_mirnov_array
+Requires-Dist: lomb_periodogram @ git+https://github.com/pponsv/lomb_periodogram

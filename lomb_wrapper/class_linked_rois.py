@@ -6,10 +6,7 @@ class Region:
     def __init__(self, tlim, flim):
         self.tlim = tlim
         self.flim = flim
-        self.f0 = (
-            min(self.flim[0], self.flim[1])
-            + abs(self.flim[1] - self.flim[0]) / 2
-        )
+        self.f0 = min(self.flim[0], self.flim[1]) + abs(self.flim[1] - self.flim[0]) / 2
 
 
 class Linked_ROIS:
@@ -48,9 +45,7 @@ class Linked_ROIS:
         self.redraw_spgram()
 
     def add_roi_signal(self):
-        self.roi_signal = pg.LinearRegionItem(
-            values=self.xlim, swapMode="sort"
-        )
+        self.roi_signal = pg.LinearRegionItem(values=self.xlim, swapMode="sort")
         self.roi_signal.setZValue(10)
         self.ax_signal.addItem(self.roi_signal)
 

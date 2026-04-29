@@ -1,10 +1,12 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import os
+
 import lomb_periodogram as lp
+import matplotlib.pyplot as plt
+import numpy as np
 import TJII_mirnov_array as tma
-from .class_linked_rois import Region
+
 from . import paths
+from .class_linked_rois import Region
 
 NMAX = 15
 MMAX = 15

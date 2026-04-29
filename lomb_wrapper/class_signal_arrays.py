@@ -1,14 +1,13 @@
-from PySide6 import QtCore, QtWidgets
-import pyqtgraph as pg
 import numpy as np
-
-from .class_signals import Signal
-from .class_linked_rois import Linked_ROIS
-from .qt_workers import Worker
-from .class_window_info import WindowInfo
-from .utils import PEN_BLACK, COLORMAP
-
 import py_dmusic
+import pyqtgraph as pg
+from PySide6 import QtCore, QtWidgets
+
+from .class_linked_rois import Linked_ROIS
+from .class_signals import Signal
+from .class_window_info import WindowInfo
+from .qt_workers import Worker
+from .utils import COLORMAP, PEN_BLACK
 
 
 class Signal_Spgram:
@@ -115,5 +114,7 @@ class Signal_Spgram:
         )
         self.dmusic.spgram_dmusic()
         self.dmusic.save_dmusic(
-            shot=self.info.shot, savefile="tmp.h5", savedir=filedir  # type: ignore
+            shot=self.info.shot,
+            savefile="tmp.h5",
+            savedir=filedir,  # type: ignore
         )
