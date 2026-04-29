@@ -1,2 +1,0 @@
-[console_scripts]
-lomb_wrapper = lomb_wrapper.main:main

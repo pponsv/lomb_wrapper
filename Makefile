@@ -1,39 +1,21 @@
 .PHONY : run build configure rebuild_ui clean remove_env deep_clean env
-ACTIVATE_VENV = . ./env/bin/activate
-PYTHON = python3
-
-all: run
+ENV_PATH = ./env/
+ACTIVATE_VENV = . $(ENV_PATH)/bin/activate
 
 run:
-	$(ACTIVATE_VENV); $(PYTHON) main.py
+	$(ACTIVATE_VENV); lomb_wrapper
 
-build: 
-	$(ACTIVATE_VENV); $(MAKE) -C ./lib/TJII_data_acquisition
-	$(ACTIVATE_VENV); $(MAKE) -C ./lib/lomb_periodogram
-	$(ACTIVATE_VENV); $(MAKE) -C ./lib/vmec_utils
-
-env: 
-	test -d env || python3 -m venv ./env
-	echo "../../../../lib/" > ./env/lib/python3.10/site-packages/libpath.pth
+install: clean env
+	$(ACTIVATE_VENV); pip install .
 
 rebuild_ui: 
-	mkdir -p src/ui/
 	$(ACTIVATE_VENV); pyside6-uic ./lomb_wrapper/ui/MainWindow.ui -o ./lomb_wrapper/ui_mainwindow.py
 
-configure: 
-	$(MAKE) env
-	$(ACTIVATE_VENV); pip install -r requirements.txt
-	$(MAKE) rebuild_ui
-	$(MAKE) update_libs
-	$(MAKE) build
-
-update_libs:
-	git submodule update --remote --merge
+env: 
+	test -d $(ENV_PATH) || python3 -m venv $(ENV_PATH)
 
 clean:
-	rm -rf .vscode/ __pycache__/ src/ui/ figs/
-	$(MAKE) -C ./lib/TJII_data_acquisition clean
-	$(MAKE) -C ./lib/lomb_periodogram clean
+	rm -rf .vscode/ __pycache__/ figs/ build/ *.egg-info/
 
 remove_env:
 	rm -rf env/

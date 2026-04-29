@@ -2,40 +2,18 @@
 
 ## Installation
 
-Instructions for linux
+Clone the repository and cd into it
+    git clone https://github.com/pponsv/lomb_wrapper
+    cd lomb_wrapper
 
-### Requirements
+The included makefile creates a virtual environment in the repository's directory. To install:
 
-#### QT
+    make install
 
-This program uses the QT6 library, and the PySide6 python bindings to it.
-In ubuntu based distributions, you can install it via:
+To run:
 
-```
-sudo apt install qt6-base-dev
-```
+    make
 
-It also requires libxcb-cursor0, that can be installed using:
+Alternatively, you can install this using pip (I would recommend using a virtual environment or similar for encapsulation):
 
-```
-sudo apt-get install libxcb-cursor0
-```
-
-#### Python:
-
-Some python dependencies need to be compiled with gfortran.
-The easiest way is using the provided makefile.
-
-```
-make configure
-```
-
-## Running
-
-From the main folder, running
-
-```
-make
-```
-
-should be enough.
+    pip install .
