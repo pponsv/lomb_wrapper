@@ -18,7 +18,7 @@ env:
 
 rebuild_ui: 
 	mkdir -p src/ui/
-	$(ACTIVATE_VENV); pyside6-uic ./ui/MainWindow.ui -o ./src/ui/ui_mainwindow.py
+	$(ACTIVATE_VENV); pyside6-uic ./lomb_wrapper/ui/MainWindow.ui -o ./lomb_wrapper/ui_mainwindow.py
 
 configure: 
 	$(MAKE) env
